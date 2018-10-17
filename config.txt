@@ -1,3 +1,0 @@
-Sexo:Hombre,mujer
-Pelo:Rubio,moreno,pelirrojo
-Gafas:Si,no
