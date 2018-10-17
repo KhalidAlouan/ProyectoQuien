@@ -1,6 +1,10 @@
 function flip(element) {
+	cartaServidor = document.getElementById("servCard").id;
 	element = element.target.parentNode.parentNode;
-    element.classList.add("flipped");
+	if (element.id != cartaServidor) {
+    	element.classList.add("flipped");
+	}  
+
 }
 
 window.onload = function addEvent(){
