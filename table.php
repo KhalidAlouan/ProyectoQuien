@@ -74,6 +74,7 @@
 	    max-height: 300px;
 	}
 </style>
+<script type="text/javascript" src="combo.js"></script>
 
 <?php  
 
@@ -135,6 +136,53 @@ for ($i=1; $i <=3; $i++) {
 }
 
 echo"</table>";
+
+echo "<br>";
+
+
+echo"<br>";
+echo"<label> Tiene Gafas : </label>";
+echo"<select class='combo'>";
+echo"<option>-Selecciona una Opción-</option>";
+echo"<option value='No'>No</option>";
+echo"<option value='si'>Si</option>";
+echo "</select>";
+
+
+echo"<br>";
+
+echo"<label> Sexo : </label>";
+echo"<select class='combo'>";
+echo"<option>-Selecciona una Opción</option>";
+echo"<option value='Hombre'>Hombre</option>";
+echo"<option value='Mujer'>Mujer</option>";
+echo "</select>";
+
+echo"<br>";
+
+echo"<label> Pelo : </label>";
+echo"<select class='combo'>";
+echo"<option>-Selecciona una Opción</option>";
+echo"<option value='Moreno'>Moreno</option>";
+echo"<option value='Rubio'>Rubio</option>";
+echo"<option value='Pelirrojo'>Pelirrojo</option>";
+echo "</select>";
+
+
+echo "<br>";
+echo "<br>";
+
+echo "<input type='button' value='Fes la Pregunta'>";
+echo"<br>";
+echo "<br>";
+
+
+$combo=$_POST['combo'];
+
+
+echo "<textarea rows='4' cols='50'>$combo";
+
+echo "</textarea>";
 
 
 
