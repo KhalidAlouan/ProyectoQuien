@@ -52,7 +52,7 @@ for ($i=1; $i <=3; $i++) {
 			<div class='container'>
 			  <div class='card' >
 			    <div class='front'>
-			      <img class='img' src='$image[$contador]'>
+			      <img  id='img'class='img' src='$image[$contador]'>
 			    </div>
 			    <div class='back'>
 			      <img class='img' src='assets/reverso/cardBack.jpg'/>
@@ -74,6 +74,50 @@ for ($i=1; $i <=3; $i++) {
 
 echo"</table>";
 
+
+
+echo"<br>";
+echo"<br>";
+
+echo"<label> Tiene Gafas? : </label>";
+
+echo"<select class='combo'>";
+	echo"<option>-Selecciona una Opción-</option>";
+	echo"<option value='No'>No</option>";
+	echo"<option value='si'>Si</option>";
+echo "</select>";
+
+echo"<br>";
+
+echo"<label> Que sexo tiene? : </label>";
+
+echo"<select class='combo'>";
+	echo"<option>-Selecciona una Opción</option>";
+	echo"<option value='Hombre'>Hombre</option>";
+	echo"<option value='Mujer'>Mujer</option>";
+echo "</select>";
+
+echo"<br>";
+
+echo"<label> Que color de pelo tiene? : </label>";
+
+echo"<select class='combo'>";
+	echo"<option>-Selecciona una Opción</option>";
+	echo"<option value='Moreno'>Moreno</option>";
+	echo"<option value='Rubio'>Rubio</option>";
+	echo"<option value='Pelirrojo'>Pelirrojo</option>";
+echo "</select>";
+
+echo "<br>";
+echo "<br>";
+
+echo "<input type='button' value='Fes la Pregunta'>";
+
+echo"<br>";
+echo"<br>";
+
+echo "<textarea rows='4' cols='50'>";
+echo "</textarea>";
 
 
 
