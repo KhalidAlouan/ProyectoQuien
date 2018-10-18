@@ -5,75 +5,13 @@
 		margin-top: 10px;
 	}
 
-		/*flip*/
-
-	/*.container {
-	    width: 220px;
-	    height: 260px;
-	    position: float-left;
-	    -webkit-perspective: 800px;
-	    -moz-perspective: 800px;
-	    -o-perspective: 800px;
-	    perspective: 800px;
-	}
-	.card {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    -webkit-transition: -webkit-transform 1s;
-	    -moz-transition: -moz-transform 1s;
-	    -o-transition: -o-transform 1s;
-	    transition: transform 1s;
-	    -webkit-transform-style: preserve-3d;
-	    -moz-transform-style: preserve-3d;
-	    -o-transform-style: preserve-3d;
-	    transform-style: preserve-3d;
-	    -webkit-transform-origin: 50% 50%;
-	}
-	.card div {
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    height: 100%;
-	    display: block;
-	    height: 100%;
-	    width: 100%;
-	    line-height: 260px;
-	    color: white;
-	    text-align: center;
-	    font-weight: bold;
-	    font-size: 140px;
-	    position: absolute;
-	    -webkit-backface-visibility: hidden;
-	    -moz-backface-visibility: hidden;
-	    -o-backface-visibility: hidden;
-	    backface-visibility: hidden;
-	}
-	.card .front {
-	     
-	}
-
-	.card .back {
-	   
-	    -webkit-transform: rotateY( 180deg );
-	    -moz-transform: rotateY( 180deg );
-	    -o-transform: rotateY( 180deg );
-	    transform: rotateY( 180deg );
-	}
-	.card.flipped {
-	    -webkit-transform: rotateY( 180deg );
-	    -moz-transform: rotateY( 180deg );
-	    -o-transform: rotateY( 180deg );
-	    transform: rotateY( 180deg );
-	}
-*/
-	/*end flip*/
 
 	.img {
 	    max-width: 300px;
 	    max-height: 300px;
 	}
 </style>
+<script type="text/javascript" src="combo.js"></script>
 
 <?php  
 
@@ -135,6 +73,51 @@ for ($i=1; $i <=3; $i++) {
 }
 
 echo"</table>";
+
+echo "<br>";
+
+
+echo"<br>";
+echo"<label id='gafas'> Tiene Gafas : </label>";
+echo"<select id='combos'>";
+echo"<option></option>";
+echo"<option value='No'>No</option>";
+echo"<option value='si'>Si</option>";
+echo "</select>";
+
+
+echo"<br>";
+
+echo"<label id='s'> Sexo : </label>";
+echo"<select  id='sexo'>";
+echo"<option></option>";
+echo"<option value='Hombre'>Hombre</option>";
+echo"<option value='Mujer'>Mujer</option>";
+echo "</select>";
+
+echo"<br>";
+
+echo"<label id='p'> Pelo : </label>";
+echo"<select id='pelo'>";
+echo"<option></option>";
+echo"<option value='Moreno'>Moreno</option>";
+echo"<option value='Rubio'>Rubio</option>";
+echo"<option value='Pelirrojo'>Pelirrojo</option>";
+echo "</select>";
+
+
+echo "<br>";
+echo "<br>";
+
+echo "<input type='button' onclick='combo()'value='Fes la Pregunta'>";
+echo"<br>";
+echo "<br>";
+
+
+
+echo "<textarea rows='4' cols='50' id='area'>";
+
+echo "</textarea>";
 
 
 
