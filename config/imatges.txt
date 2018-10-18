@@ -1,12 +1,12 @@
-uno.jpg:Sexo_Hombre,Pelo_Rubio,Gafas_No
-dos.jpg:Sexo_Hombre,Pelo_Moreno,Gafas_No
-tres.jpg:Sexo_Hombre,Pelo_Pelirrojo,Gafas_No
-cuatro.jpg:Sexo_Hombre,Pelo_Rubio,Gafas_Si
-cinco.jpg:Sexo_Hombre,Pelo_Moreno,Gafas_Si
-seis.jpg:Sexo_Hombre,Pelo_Pelirrojo,Gafas_Si
-siete.jpg:Sexo_Mujer,Pelo_Rubio,Gafas_No
-ocho.jpg:Sexo_Mujer,Pelo_Moreno,Gafas_No
-nueve.jpg:Sexo_Mujer,Pelo_Pelirrojo,Gafas_No
-diez.jpg:Sexo_Mujer,Pelo_Rubio,Gafas_Si
-once.jpg:Sexo_Mujer,Pelo_Moreno,Gafas_Si
-doce.jpg:Sexo_Mujer,Pelo_Pelirrojo,Gafas_Si
+uno.jpg : sexo hombre , pelo rubio , gafas no
+dos.jpg : sexo hombre , pelo moreno , gafas no
+tres.jpg : sexo hombre , pelo pelirrojo , gafas no
+cuatro.jpg : sexo hombre , pelo rubio , gafas si
+cinco.jpg : sexo hombre , pelo moreno , gafas si
+seis.jpg : sexo hombre , pelo pelirrojo , gafas si
+siete.jpg : sexo mujer , pelo rubio , gafas no
+ocho.jpg : sexo mujer , pelo moreno , gafas no
+nueve.jpg : sexo mujer , pelo pelirrojo , gafas no
+diez.jpg : sexo mujer , pelo rubio , gafas si
+once.jpg : sexo mujer , pelo moreno , gafas si
+doce.jpg : sexo mujer , pelo pelirrojo , gafas si

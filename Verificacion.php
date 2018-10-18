@@ -52,6 +52,7 @@
 		$var_guardar_car = $x[0];
 		array_push($array_caracterisitcas_config_pura, $var_guardar_car);
 	}
+
 	
 	//Longitud del array sin nombres
 	$long_array_sin_nombre = count($array_sin_nombre);
@@ -65,8 +66,25 @@
 		$var_guardar_linea = $x[0];
 		array_push($array_aa, $var_guardar_linea);
 	}
+
+
+	$array_sexo = array();
+
+
+	$lon_array_aa = count($array_aa);
+
+	for ($i=0; $i <$lon_array_aa ; $i++) { 
+		$x = preg_split("/ /", $array_aa[$i]);
+		$var_guardar_sexo = $x[1];
+		array_push($array_sexo, $var_guardar_sexo);
+
+	}
+
+	print_r($array_sin_nombre);
+
+
 	
 	//Si el programa ha llegado hasta aqui redirecciona hacia el main.php
-	header("Location: main.php");
+	//header("Location: main.php");
 	
 ?>
