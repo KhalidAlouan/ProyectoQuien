@@ -15,8 +15,11 @@ function endGame(){
 	}
 	if (cartaServidorImg.src == cartaFinal.src ) {
 		console.log("Win");
+		//modalGanar();
 	}else{
 		console.log("Pringado");
+		//modalPerder();
+
 	}
 
 	
