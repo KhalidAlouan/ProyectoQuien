@@ -1,11 +1,11 @@
 //GLOBAL VAR
+var CARTASERVIDOR = document.getElementById("servCard");
 var cartas = 11;
 var cartaFinal;
 //GLOBAL END
 
 function endGame(){
-	cartaServidor = document.getElementById("servCard");
-	cartaServidorImg = cartaServidor.children[1].children[0];
+	cartaServidorImg = CARTASERVIDOR.children[1].children[0];
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
@@ -24,12 +24,11 @@ function endGame(){
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
 	if (cartas!=0) {
-		cartaServidor = document.getElementById("servCard").id;
 		element = element.target.parentNode.parentNode;
-		if(element.classList.contains("flipped")== false && element.id != cartaServidor ){
+		if(element.classList.contains("flipped")== false && element.id != CARTASERVIDOR.id ){
 			cartas--;
 		}
-		if (element.id != cartaServidor) {
+		if (element.id != CARTASERVIDOR.id) {
 	    	element.classList.add("flipped");
 
 		}
