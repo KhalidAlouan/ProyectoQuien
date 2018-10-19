@@ -157,7 +157,7 @@
 
 	
 	//Si el programa ha llegado hasta aqui redirecciona hacia el main.php
-	//header("Location: main.php");
+	header("Location: main.php");
 
 
 	
