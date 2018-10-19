@@ -1,0 +1,12 @@
+uno.jpg : sexo hombre , pelo rubio , gafas no
+dos.jpg : sexo hombre , pelo moreno , gafas no
+tres.jpg : sexo hombre , pelo pelirrojo , gafas no
+cuatro.jpg : sexo hombre , pelo rubio , gafas si
+cinco.jpg : sexo hombre , pelo moreno , gafas si
+seis.jpg : sexo hombre , pelo pelirrojo , gafas si
+siete.jpg : sexo mujer , pelo rubio , gafas no
+ocho.jpg : sexo mujer , pelo moreno , gafas no
+nueve.jpg : sexo mujer , pelo pelirrojo , gafas no
+diez.jpg : sexo mujer , pelo rubio , gafas si
+once.jpg : sexo mujer , pelo moreno , gafas si
+doce.jpg : sexo mujer , pelo pelirrojo , gafas si
