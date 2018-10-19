@@ -1,3 +1,0 @@
-sexo: hombre mujer
-pelo: rubio moreno pelirrojo
-gafas: si no

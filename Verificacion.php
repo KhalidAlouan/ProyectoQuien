@@ -67,10 +67,10 @@
 		array_push($array_aa, $var_guardar_linea);
 	}
 
-
+	//array para guardar el sexo
 	$array_sexo = array();
 
-
+	//contar la longitud del array aa
 	$lon_array_aa = count($array_aa);
 
 	for ($i=0; $i <$lon_array_aa ; $i++) { 
@@ -80,11 +80,85 @@
 
 	}
 
-	print_r($array_sin_nombre);
 
+	$array_ab = array();
+
+	for ($i=0; $i < count($array_sin_nombre) ; $i++) { 
+		$x = preg_split("/,/", $array_sin_nombre[$i]);
+		$var_guardar_linea = $x[1];
+		array_push($array_ab, $var_guardar_linea);
+	}
+
+
+
+	$array_pelo = array();
+
+	for ($i=0; $i <(count($array_ab)) ; $i++) { 
+		$x = preg_split("/ /", $array_ab[$i]);
+		$var_guardar_pelo = $x[1];
+		array_push($array_pelo, $var_guardar_pelo);
+
+	}
+
+	$array_ac = array();
+
+	for ($i=0; $i <$long_array_sin_nombre; $i++) { 
+		$x = preg_split("/,/", $array_sin_nombre[$i]);
+		$var_guardar_linea = $x[2];
+		array_push($array_ac, $var_guardar_linea);
+	}
+
+	$array_gafas = array();
+
+	for ($i=0; $i <count($array_ac) ; $i++) { 
+		$x = preg_split("/ /", $array_ac[$i]);
+		$var_guardar_gafas = $x[1];
+		array_push($array_gafas, $var_guardar_gafas);
+	}
+
+	
+	echo "<br>";
+
+
+	$array_config = file("config/config.txt");
+
+
+	$array_config_separada = array();
+
+	for ($i=0; $i <count($array_config) ; $i++) { 
+		$x = preg_split("/:/", $array_config[$i]);
+		$var_guardar_atr_config = $x[0];
+		array_push($array_config_separada, $var_guardar_atr_config);
+
+	}
+
+
+	//Recorrer el array de sexos para ver si todos los elemtnos son iguales que el atributo del config.txt
+
+	foreach ($array_sexo as $key) {
+		if ($key != $array_config_separada[0] ) {
+			exit("ERROR: Hay caracterisitcas que no coinciden");
+		}
+	}
+
+	foreach ($array_pelo as $key) {
+		if ($key != $array_config_separada[1] ) {
+			exit("ERROR: Hay caracterisitcas que no coinciden");
+
+		}
+	}
+
+	foreach ($array_gafas as $key) {
+		if ($key != $array_config_separada[2] ) {
+			exit("ERROR: Hay caracterisitcas que no coinciden");
+
+		}
+	}
 
 	
 	//Si el programa ha llegado hasta aqui redirecciona hacia el main.php
 	//header("Location: main.php");
+
+
 	
 ?>
