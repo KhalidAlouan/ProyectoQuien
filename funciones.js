@@ -1,4 +1,4 @@
-
+var contador_intentos = 0;
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
 	cartaServidor = document.getElementById("servCard").id;
@@ -27,6 +27,11 @@ function combo(){
 	var gafas=document.getElementById("gafas").innerHTML;
 	
 	are.innerHTML=gafas+selected;
+
+	
+	contador_intentos++
+
+	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 	
 }
 
@@ -38,4 +43,9 @@ function combo2(){
 	
 	area.innerHTML=sexo+sexo2;
 
+}
+
+function sonido(){
+    var audio = document.getElementById("audio");
+    audio.play();
 }

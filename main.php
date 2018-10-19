@@ -1,6 +1,12 @@
- <script type="text/javascript" defer src="funciones.js"></script>
- <link href="style.css" rel="stylesheet" type="text/css">
+<html>
+<head>
+	<script type="text/javascript" defer src="funciones.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
 
+
+</head>
+<body>
+<audio id="audio" src="latigo.mp3"></audio>
 
 <?php  
 
@@ -9,6 +15,9 @@ $images=glob($imageDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 $imagenAzar=$images[array_rand($images)];
 
 echo "<h4 align='center'>Carta del Servidor</h4>";
+
+//Mostrar el contador de preguntas
+echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 
 echo "<table style='border:2px solid black' align='center'";
 
@@ -53,7 +62,7 @@ for ($i=1; $i <=4; $i++) {
 			<div class='container'>
 			  <div class='card' >
 			    <div class='front'>
-			      <img  id='img'class='img' src='$image[$contador]'>
+			      <img onclick='sonido' id='img'class='img' src='$image[$contador]'>
 			    </div>
 			    <div class='back'>
 			      <img class='img' src='assets/reverso/cardBack.jpg'/>
@@ -125,3 +134,5 @@ echo "</textarea>";
 
 
 ?>
+</body>
+</html>
