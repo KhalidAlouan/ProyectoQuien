@@ -29,6 +29,29 @@ function combo(){
 	are.innerHTML=gafas+selected;
 
 	
+
+	var combos = document.getElementById("combos").value;
+	var sexo = document.getElementById("sexo").value;
+	var pelo = document.getElementById("pelo").value;
+
+	array_select = [combos,sexo,pelo];
+
+	var_contar_nulls = 0;
+
+	for (var i = 0; i < array_select.length; i++) {
+		if (array_select[i] == "") {
+			var_contar_nulls++;
+		}
+	}
+
+	if (var_contar_nulls <= 1) {
+		alert("error");
+		combos.options[combos.selectedIndex]=" ";
+		sexo.selectedIndex =" ";
+		pelo.selectedIndex =" ";
+	}
+
+	
 	contador_intentos++
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
@@ -46,6 +69,6 @@ function combo2(){
 }
 
 function sonido(){
-    var audio = document.getElementById("audio");
+    var audio = new Audio('latigo.mp3');
     audio.play();
 }

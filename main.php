@@ -6,7 +6,6 @@
 
 </head>
 <body>
-<audio id="audio" src="latigo.mp3"></audio>
 
 <?php  
 
@@ -62,7 +61,7 @@ for ($i=1; $i <=4; $i++) {
 			<div class='container'>
 			  <div class='card' >
 			    <div class='front'>
-			      <img onclick='sonido' id='img'class='img' src='$image[$contador]'>
+			      <img onclick='sonido()' id='img'class='img' src='$image[$contador]'>
 			    </div>
 			    <div class='back'>
 			      <img class='img' src='assets/reverso/cardBack.jpg'/>
