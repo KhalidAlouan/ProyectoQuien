@@ -1,6 +1,21 @@
  <script type="text/javascript" defer src="funciones.js"></script>
  <link href="style.css" rel="stylesheet" type="text/css">
 
+<body>
+	
+	<div id="modalUno" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h1 id="textoFinal"></h1>
+		</div>
+	</div>
+<!-- 	<div id="modalDos" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h1 id="textoFinal"></h1>
+		</div>
+	</div> -->
+</body>
 
 <?php  
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
@@ -60,10 +75,12 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 		$var_guardarSexoU = $s[2];
 		$var_guardarPeloU = $p[2];
 		$var_guardarGafasU = $g[2];
+		//Con la funcion trim estoy eliminando el \n del final de linea.
+		$var_guardarGafasUTrimmed = trim($var_guardarGafasU, " \n");
 
 		array_push($array_sexoU,$var_guardarSexoU);
 		array_push($array_peloU,$var_guardarPeloU);
-		array_push($array_gafasU,$var_guardarGafasU);
+		array_push($array_gafasU,$var_guardarGafasUTrimmed);
 	}
 	//Aqui al separar todas las caracteristicas, contruimos otro array similar a una imagen en HTML para introducir por separado las caracteristicas.
 	$array_caracteristicas_completas_img = array();
@@ -160,44 +177,44 @@ echo"</table>";
 echo"<br>";
 echo"<br>";
 
-echo"<label id='gafas'> Tiene Gafas : </label>";
-echo"<select id='combos'>";
+echo"<label id='g'> Accesorio: Lleva gafas?  </label>";
+echo"<select id='gafas'>";
 echo"<option></option>";
-echo"<option value='No'>No</option>";
-echo"<option value='si'>Si</option>";
+echo"<option value='no'>no</option>";
+echo"<option value='si'>si</option>";
 echo "</select>";
 
 
 echo"<br>";
 
-echo"<label id='s'> Sexo : </label>";
+echo"<label id='s'> Sexo: Es hombre?  </label>";
 echo"<select  id='sexo'>";
 echo"<option></option>";
-echo"<option value='Hombre'>Hombre</option>";
-echo"<option value='Mujer'>Mujer</option>";
+echo"<option value='hombre'>si</option>";
+echo"<option value='mujer'>no</option>";
 echo "</select>";
 
 echo"<br>";
 
-echo"<label id='p'> Pelo : </label>";
+echo"<label id='p'> Pelo: Que color de pelo tiene?  </label>";
 echo"<select id='pelo'>";
 echo"<option></option>";
-echo"<option value='Moreno'>Moreno</option>";
-echo"<option value='Rubio'>Rubio</option>";
-echo"<option value='Pelirrojo'>Pelirrojo</option>";
+echo"<option value='moreno'>moreno</option>";
+echo"<option value='rubio'>rubio</option>";
+echo"<option value='pelirrojo'>pelirrojo</option>";
 echo "</select>";
 
 
 echo "<br>";
 echo "<br>";
 
-echo "<input type='button' onclick='combo()'value='Fes la Pregunta'>";
+echo "<input id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
 echo"<br>";
 echo "<br>";
 
 
 
-echo "<textarea rows='4' cols='50' id='area'>";
+echo "<textarea rows='10' cols='50' id='area'>";
 
 echo "</textarea>";
 
