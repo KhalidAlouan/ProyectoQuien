@@ -19,6 +19,27 @@ window.onload = function addEvent(){
 	}
 }
 
+
+
+function combo2(){
+	var sexo=document.getElementById("sexo");
+	var sexo2=sexo.options[sexo.selectedIndex].text;
+	var area=document.getElementById("area");
+	var s=document.getElementById("s").innerHTML;
+	
+	area.innerHTML=sexo+sexo2;
+
+}
+
+//Crea un objeto de tipo audio y que se ejecuta
+function audio() {
+	var audio = new Audio('latigo.mp3');
+    audio.play();
+
+    cartas__--
+    cartas--
+}
+
 // La siguiente función recoge el texto del primer select y 
 // lo mete en el textarea
 function combo(){
@@ -58,22 +79,4 @@ function combo(){
 		alert("Seguro");
 	}
 	
-}
-
-function combo2(){
-	var sexo=document.getElementById("sexo");
-	var sexo2=sexo.options[sexo.selectedIndex].text;
-	var area=document.getElementById("area");
-	var s=document.getElementById("s").innerHTML;
-	
-	area.innerHTML=sexo+sexo2;
-
-}
-
-//Crea un objeto de tipo audio y que se ejecuta
-function audio() {
-	var audio = new Audio('latigo.mp3');
-    audio.play();
-
-    cartas__--
 }
