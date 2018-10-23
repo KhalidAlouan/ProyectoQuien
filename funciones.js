@@ -1,5 +1,5 @@
 //GLOBAL VAR
-var CARTASERVIDOR = document.getElementById("servCard");
+var CARTA_SERVIDOR = document.getElementById("servCard");
 var cartas = 11;
 var cartaFinal;
 
@@ -20,8 +20,47 @@ function spanDisplayNone(){
 	}
 
 }
+//Funcion que se ejecuta nada mas cagar la pagina que añade todos los eventos necesarios.
+window.onload = function addEvent(){
+	hiddenPreguntaUsuarioAñadirRanking();
+	var cartas = document.getElementsByClassName("card");
+	var span = document.getElementsByClassName("close")[0];
+	var preguntar = document.getElementById("ferLaPregunta");
+	span.addEventListener("click",spanDisplayNone);
+	preguntar.addEventListener("click", comboBoxSexo);
+	preguntar.addEventListener("click", comboBoxGafas);
+	preguntar.addEventListener("click", comboBoxPelo);
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+
+		cartas[i].addEventListener("click",flip);
+	}
+}
+
+function hiddenPreguntaUsuarioAñadirRanking(){
+	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
+	var botonUsuarioRanking = document.getElementById("opcion");
+	var nombreUsuarioRanking = document.getElementById("añadirNombre");
+
+	preguntaUsuarioRanking.style.visibility = 'hidden';
+	botonUsuarioRanking.style.visibility = 'hidden';
+	nombreUsuarioRanking.style.visibility = 'hidden';
+
+	preguntaUsuarioRanking.innerHTML = "Quieres añadir tu nombre al ranking?";
+
+}
+
+function mostrarPreguntaUsuarioAñadirRanking(){
+	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
+	var botonUsuarioRanking = document.getElementById("opcion");
+	var nombreUsuarioRanking = document.getElementById("añadirNombre");
+	botonUsuarioRanking.style.visibility = '';
+	preguntaUsuarioRanking.style.visibility = '';
+	nombreUsuarioRanking.style.visibility = '';
+
+}
+
 function endGame(){
-	cartaServidorImg = CARTASERVIDOR.children[1].children[0];
+	cartaServidorImg = CARTA_SERVIDOR.children[1].children[0];
 	var cartas = document.getElementsByClassName("card");
 	var texto = document.getElementById("textoFinal");
 
@@ -31,16 +70,15 @@ function endGame(){
 			cartaFinal = cartas[i].children[0].children[0];
 		}
 	}
-	CARTASERVIDOR.classList.add("flipped");
+	CARTA_SERVIDOR.classList.add("flipped");
 	if (cartaServidorImg.src == cartaFinal.src ) {
-		console.log("Win");
 		modalOn();
+		mostrarPreguntaUsuarioAñadirRanking();
 		texto.innerHTML = "Has ganado."
 
 
 		//modalGanar();
 	}else{
-		console.log("Pringado");
 		modalOn();
 		texto.innerHTML = "Has perdido."
 
@@ -55,10 +93,10 @@ function endGame(){
 function flip(element) {
 	if (cartas!=0) {
 		element = element.target.parentNode.parentNode;
-		if(element.classList.contains("flipped")== false && element.id != CARTASERVIDOR.id ){
+		if(element.classList.contains("flipped")== false && element.id != CARTA_SERVIDOR.id ){
 			cartas--;
 		}
-		if (element.id != CARTASERVIDOR.id) {
+		if (element.id != CARTA_SERVIDOR.id) {
 	    	element.classList.add("flipped");
 
 		}
@@ -70,25 +108,14 @@ function flip(element) {
 	
 
 }
-//Funcion que se ejecuta nada mas cagar la pagina que añade todos los eventos necesarios.
-window.onload = function addEvent(){
-	var cartas = document.getElementsByClassName("card");
-	var span = document.getElementsByClassName("close")[0];
-	var preguntar = document.getElementById("ferLaPregunta");
-	span.addEventListener("click",spanDisplayNone);
-	preguntar.addEventListener("click", comboBoxSexo);
-	preguntar.addEventListener("click", comboBoxGafas);
-	preguntar.addEventListener("click", comboBoxPelo);
-	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
-		cartas[i].addEventListener("click",flip);
-	}
-}
+
+
 function comboBoxGafas(){
 	var gafasSeleccionado = document.getElementById("gafas").value.toString();
-	var atributoCartaSevidorGafas =CARTASERVIDOR.children[1].children[0].getAttribute("gafas").toString();
+	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
 	if (gafasSeleccionado == "si") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas? -Si\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -96,7 +123,7 @@ function comboBoxGafas(){
 		}
 	}
 	if (gafasSeleccionado == "no") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida Lleva gafas? -No\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: No lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "no") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -108,9 +135,9 @@ function comboBoxGafas(){
 }
 function comboBoxSexo(){
 	var sexoSeleccionado = document.getElementById("sexo").value.toString();
-	var atributoCartaSevidorSexo =CARTASERVIDOR.children[1].children[0].getAttribute("sexo").toString();
+	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
 	if (sexoSeleccionado == "hombre") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre? -Si\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
 		if (atributoCartaSevidorSexo == "hombre") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -118,7 +145,7 @@ function comboBoxSexo(){
 		}
 	}
 	if (sexoSeleccionado == "mujer") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre? -No\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es mujer?\n '
 		if (atributoCartaSevidorSexo == "mujer") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -131,9 +158,9 @@ function comboBoxSexo(){
 
 function comboBoxPelo(){
 	var peloSeleccionado = document.getElementById("pelo").value.toString();
-	var atributoCartaSevidorPelo =CARTASERVIDOR.children[1].children[0].getAttribute("pelo").toString();
+	var atributoCartaSevidorPelo =CARTA_SERVIDOR.children[1].children[0].getAttribute("pelo").toString();
 	if (peloSeleccionado == "moreno") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Que color de pelo tiene? -Moreno\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
 		if (atributoCartaSevidorPelo == "moreno") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -141,7 +168,7 @@ function comboBoxPelo(){
 		}
 	}
 	if (peloSeleccionado == "rubio") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Que color de pelo tiene? -Rubio\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es rubio?\n '
 		if (atributoCartaSevidorPelo == "rubio") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -150,7 +177,7 @@ function comboBoxPelo(){
 
 	}	
 	if (peloSeleccionado == "pelirrojo") {
-		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Que color de pelo tiene? -Pelirrojo\n '
+		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es pelirrojo?\n '
 		if (atributoCartaSevidorPelo == "pelirrojo") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 		}else{
@@ -161,24 +188,4 @@ function comboBoxPelo(){
 	}	
 
 }
-// La siguiente función recoge el texto del primer select y 
-// lo mete en el textarea
-// function combo(){
-// 	var sel=document.getElementById("gafas");
-// 	var selected=sel.options[sel.selectedIndex].text;
-// 	var are=document.getElementById("area");
-// 	var gafas=document.getElementById("g").innerHTML;
-	
-// 	are.innerHTML=gafas+selected;
-	
-// }
 
-// function combo2(){
-// 	var sexo=document.getElementById("sexo");
-// 	var sexo2=sexo.options[sexo.selectedIndex].text;
-// 	var area=document.getElementById("area");
-// 	var s=document.getElementById("s").innerHTML;
-	
-// 	area.innerHTML=sexo+sexo2;
-
-// }

@@ -7,17 +7,35 @@
 		<div class="modal-content">
 			<span class="close">&times;</span>
 			<h1 id="textoFinal"></h1>
+			<h3 id="preguntaAñadirUsuarioRanking"></h3>
+			<input id='añadirNombre'type='text' value=''>
+			<input id='opcion'type='button' value='Añadir'>
+
 		</div>
 	</div>
-<!-- 	<div id="modalDos" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<h1 id="textoFinal"></h1>
-		</div>
-	</div> -->
 </body>
 
-<?php  
+<?php 
+
+ranking();
+function ranking(){
+echo "<div id='modalRanking' class='modal'>
+		<div class='modal-content'>
+			<span class='close'>&times;</span>";
+			for ($i=1; $i <=2; $i++) { 
+				echo "<tr>\n";
+				for ($j=1; $j <=3; $j++) { 
+					echo "<td style='border:1px solid black'>
+						</td>";
+
+
+				}
+			}		
+			
+echo "
+		</div>
+	</div>";
+}
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
 
@@ -177,31 +195,31 @@ echo"</table>";
 echo"<br>";
 echo"<br>";
 
-echo"<label id='g'> Accesorio: Lleva gafas?  </label>";
+echo"<label id='g'> Accesorio:  </label>";
 echo"<select id='gafas'>";
 echo"<option></option>";
-echo"<option value='no'>no</option>";
-echo"<option value='si'>si</option>";
+echo"<option value='no'>No lleva gafas?</option>";
+echo"<option value='si'>Lleva gafas?</option>";
 echo "</select>";
 
 
 echo"<br>";
 
-echo"<label id='s'> Sexo: Es hombre?  </label>";
+echo"<label id='s'> Sexo:  </label>";
 echo"<select  id='sexo'>";
 echo"<option></option>";
-echo"<option value='hombre'>si</option>";
-echo"<option value='mujer'>no</option>";
+echo"<option value='hombre'>Es hombre?</option>";
+echo"<option value='mujer'>Es mujer?</option>";
 echo "</select>";
 
 echo"<br>";
 
-echo"<label id='p'> Pelo: Que color de pelo tiene?  </label>";
+echo"<label id='p'> Pelo: </label>";
 echo"<select id='pelo'>";
 echo"<option></option>";
-echo"<option value='moreno'>moreno</option>";
-echo"<option value='rubio'>rubio</option>";
-echo"<option value='pelirrojo'>pelirrojo</option>";
+echo"<option value='moreno'> Es moreno?</option>";
+echo"<option value='rubio'>Es rubio?</option>";
+echo"<option value='pelirrojo'>Es pelirrojo?</option>";
 echo "</select>";
 
 
