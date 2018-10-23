@@ -2,8 +2,6 @@
 <head>
 	<script type="text/javascript" defer src="funciones.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css">
-
-
 </head>
 <body>
 
@@ -36,8 +34,6 @@ echo "<tr><td style='border:1px solid black'>
 
 echo "</table>";
 
-
-
 echo "<br>";
 echo "<br>";
 echo "<br>";
@@ -61,29 +57,19 @@ for ($i=1; $i <=4; $i++) {
 			<div class='container'>
 			  <div class='card' >
 			    <div class='front'>
-			      <img onclick='sonido()' id='img'class='img' src='$image[$contador]'>
+			      <img onclick='audio()' id='img' class='img' src='$image[$contador]'>
 			    </div>
 			    <div class='back'>
 			      <img class='img' src='assets/reverso/cardBack.jpg'/>
 			    </div>
 			  </div>
 			</div></td>";
-		$contador++;
-
-
-
-
-
-
-		
-		
+		$contador++;		
 	}
 	echo "</tr>";
 }
 
 echo"</table>";
-
-
 
 echo"<br>";
 echo"<br>";
@@ -128,9 +114,6 @@ echo "<br>";
 echo "<textarea rows='4' cols='50' id='area'>";
 
 echo "</textarea>";
-
-
-
 
 ?>
 </body>

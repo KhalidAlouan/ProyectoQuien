@@ -1,4 +1,7 @@
 var contador_intentos = 0;
+var cartas = 11;
+var cartas__ = 11;
+
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
 	cartaServidor = document.getElementById("servCard").id;
@@ -6,8 +9,8 @@ function flip(element) {
 	if (element.id != cartaServidor) {
     	element.classList.add("flipped");
 	}  
-
 }
+
 //Funcion que se ejecuta nada mas cagar la pagina que añade la funcion flip() a las cartas.
 window.onload = function addEvent(){
 	var cartas = document.getElementsByClassName("card");
@@ -15,8 +18,6 @@ window.onload = function addEvent(){
 		cartas[i].addEventListener("click",flip);
 	}
 }
-
-
 
 // La siguiente función recoge el texto del primer select y 
 // lo mete en el textarea
@@ -27,8 +28,6 @@ function combo(){
 	var gafas=document.getElementById("gafas").innerHTML;
 	
 	are.innerHTML=gafas+selected;
-
-	
 
 	var combos = document.getElementById("combos").value;
 	var sexo = document.getElementById("sexo").value;
@@ -50,11 +49,14 @@ function combo(){
 		sexo.selectedIndex =" ";
 		pelo.selectedIndex =" ";
 	}
-
 	
 	contador_intentos++
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
+
+	if (cartas == cartas__) {
+		alert("Seguro");
+	}
 	
 }
 
@@ -68,7 +70,10 @@ function combo2(){
 
 }
 
-function sonido(){
-    var audio = new Audio('latigo.mp3');
+//Crea un objeto de tipo audio y que se ejecuta
+function audio() {
+	var audio = new Audio('latigo.mp3');
     audio.play();
+
+    cartas__--
 }
