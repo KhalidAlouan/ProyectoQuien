@@ -1,4 +1,5 @@
 var contador_intentos = 0;
+cartas=11;
 
 
 //Se encarga de añadir la class que permite el efecto de girar.
@@ -54,6 +55,8 @@ function combo(){
     if (contador_intentos>=1) {
     	desactivarModo();
     }
+
+    
 	
 	 
 
@@ -89,8 +92,7 @@ window.onclick=function(event){
 }
 
 
-	
-
-
-
-
+//F-Artificiales
+function fuegosArt(){
+	location.href ="FireWorks.html"
+}

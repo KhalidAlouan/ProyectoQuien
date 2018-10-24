@@ -9,6 +9,7 @@ $imageDir="assets/cartas/";
 $images=glob($imageDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 $imagenAzar=$images[array_rand($images)];
 
+//Modo easy
 echo "<label id='easy'>Modo:</lable>"; echo "<br>";
 echo "<button id='easydos'>Easy</button>";
 echo "<h4 align='center'>Carta del Servidor</h4>";
@@ -120,6 +121,13 @@ echo "<textarea rows='4' cols='50' id='area'>";
 
 echo "</textarea>";
 
+echo "<br>";
+
+echo "<input type='button' value='Focs Artificials'onclick='fuegosArt()'>";
+echo "</input>";
+
+
+
 echo "<div id='modal' class='clasmodal'>";
 	echo "<div class='contenido'>";
 		echo "<span  class='cerrar'>";
@@ -128,7 +136,6 @@ echo "<div id='modal' class='clasmodal'>";
 		echo "<button onclick='CerrarModal()'>Cerrar";
 		echo "</button>";
 echo "</div>";
-
 
 
 
