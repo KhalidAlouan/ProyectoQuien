@@ -8,8 +8,10 @@
 			<span class="close">&times;</span>
 			<h1 id="textoFinal"></h1>
 			<h3 id="preguntaAñadirUsuarioRanking"></h3>
-			<input id='añadirNombre'type='text' value=''>
-			<input id='opcion'type='button' value='Añadir'>
+			<form action="ranking.php" method="post">
+				<input id='añadirNombre'type='text' name='añadirNombre'>
+				<input id='opcion'type='submit' value='Añadir'>
+			</form>
 
 		</div>
 	</div>
@@ -17,25 +19,6 @@
 
 <?php 
 
-ranking();
-function ranking(){
-echo "<div id='modalRanking' class='modal'>
-		<div class='modal-content'>
-			<span class='close'>&times;</span>";
-			for ($i=1; $i <=2; $i++) { 
-				echo "<tr>\n";
-				for ($j=1; $j <=3; $j++) { 
-					echo "<td style='border:1px solid black'>
-						</td>";
-
-
-				}
-			}		
-			
-echo "
-		</div>
-	</div>";
-}
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
 
