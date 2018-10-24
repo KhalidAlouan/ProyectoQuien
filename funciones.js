@@ -1,6 +1,6 @@
 var contador_intentos = 0;
 var cartas = 11;
-var cartas__ = 11;
+var cont_cartas = cartas;
 
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
@@ -19,8 +19,6 @@ window.onload = function addEvent(){
 	}
 }
 
-
-
 function combo2(){
 	var sexo=document.getElementById("sexo");
 	var sexo2=sexo.options[sexo.selectedIndex].text;
@@ -36,7 +34,6 @@ function audio() {
 	var audio = new Audio('latigo.mp3');
     audio.play();
 
-    cartas__--
     cartas--
 }
 
@@ -70,13 +67,24 @@ function combo(){
 		sexo.selectedIndex =" ";
 		pelo.selectedIndex =" ";
 	}
-	
+		
 	contador_intentos++
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
-	if (cartas == cartas__) {
-		alert("Seguro");
+
+		
+	if (cont_cartas == cartas) {
+		alert("Seguro?");
+	} else {
+		cont_cartas--
 	}
-	
+
+
+	/*if ( cont_cartas == cartas) {
+		alert("seguro?")
+	} else {
+		cont_cartas--;
+	}*/
+
 }

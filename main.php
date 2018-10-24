@@ -30,8 +30,8 @@ echo "<tr><td style='border:1px solid black'>
   </div>
 </div>
 </td></tr>";
-
-
+	
+	
 echo "</table>";
 
 echo "<br>";
