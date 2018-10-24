@@ -1,3 +1,5 @@
+var contador_intentos = 0;
+
 
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
@@ -18,23 +20,77 @@ window.onload = function addEvent(){
 
 
 
-// La siguiente función recoge el texto del primer select y lo mete en el textarea
+// La siguiente funcion muestra un error si el usuario ha hecho mas de un pregunta
 function combo(){
-	var sel=document.getElementById("combos");
-	var selected=sel.options[sel.selectedIndex].text;
-	var are=document.getElementById("area");
-	var gafas=document.getElementById("gafas").innerHTML;
+	var parrafo=document.getElementById("parrafo");
+	var modal=document.getElementById("modal");
+	var combos = document.getElementById("combos").value;
+    var sexo = document.getElementById("sexo").value;
+    var pelo = document.getElementById("pelo").value;
+
+
+    array_select = [combos,sexo,pelo];
+
+    var_contar_nulls = 0;
+
+    for (var i = 0; i < array_select.length; i++) {
+        if (array_select[i] == "") {
+            var_contar_nulls++;
+        }
+    }
+
+    contador_intentos++
+    document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
+
+    if (var_contar_nulls <= 1) {
+    	modal.style.visibility="visible";
+        modal.style.display="block";
+        document.getElementById("combos").selectedIndex=0;
+        document.getElementById("sexo").selectedIndex=0;
+        document.getElementById("pelo").selectedIndex=0;
+    }
 	
-	are.innerHTML=gafas+selected;
+
+    if (contador_intentos>=1) {
+    	desactivarModo();
+    }
 	
+	 
+
 }
 
-function combo2(){
-	var sexo=document.getElementById("sexo");
-	var sexo2=sexo.options[sexo.selectedIndex].text;
-	var area=document.getElementById("area");
-	var s=document.getElementById("s").innerHTML;
+function desactivarModo(){
+
+    var easy=document.getElementById("easy");
+	var easy2=document.getElementById("easydos");
+
+    
+    easy2.disabled=true;
+}
+
+//Button que cierra el modal
+function CerrarModal(){
+	var cerrar=document.getElementsByClassName("cerrar")[0];
+	var modal=document.getElementById("modal");
 	
-	area.innerHTML=sexo+sexo2;
+	modal.style.visibility="hidden";
+	modal.style.display="none";
+		
+}
+
+//Función que cierra el modal al clicar fuera de el modal
+window.onclick=function(event){
+	var modal=document.getElementById("modal");
+	if (event.target==modal){
+		modal.style.visibility="hidden";
+		modal.style.display="none";
+	}
 
 }
+
+
+	
+
+
+
+

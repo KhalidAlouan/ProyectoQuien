@@ -9,7 +9,11 @@ $imageDir="assets/cartas/";
 $images=glob($imageDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 $imagenAzar=$images[array_rand($images)];
 
+echo "<label id='easy'>Modo:</lable>"; echo "<br>";
+echo "<button id='easydos'>Easy</button>";
 echo "<h4 align='center'>Carta del Servidor</h4>";
+//Mostrar el contador de preguntas
+echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 
 echo "<table style='border:2px solid black' align='center'";
 
@@ -77,7 +81,7 @@ echo"<br>";
 echo"<br>";
 
 echo"<label id='gafas'> Tiene Gafas : </label>";
-echo"<select id='combos'>";
+echo"<select  id='combos'>";
 echo"<option></option>";
 echo"<option value='No'>No</option>";
 echo"<option value='si'>Si</option>";
@@ -96,7 +100,7 @@ echo "</select>";
 echo"<br>";
 
 echo"<label id='p'> Pelo : </label>";
-echo"<select id='pelo'>";
+echo"<select  id='pelo'>";
 echo"<option></option>";
 echo"<option value='Moreno'>Moreno</option>";
 echo"<option value='Rubio'>Rubio</option>";
@@ -108,14 +112,22 @@ echo "<br>";
 echo "<br>";
 
 echo "<input type='button' onclick='combo()'value='Fes la Pregunta'>";
+echo "</input>";
+
 echo"<br>";
 echo "<br>";
-
-
-
 echo "<textarea rows='4' cols='50' id='area'>";
 
 echo "</textarea>";
+
+echo "<div id='modal' class='clasmodal'>";
+	echo "<div class='contenido'>";
+		echo "<span  class='cerrar'>";
+		echo "</span>";
+		echo "<p align='center'>Error: no puedes hacer mas de una pregunta</p>";
+		echo "<button onclick='CerrarModal()'>Cerrar";
+		echo "</button>";
+echo "</div>";
 
 
 
