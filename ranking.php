@@ -1,30 +1,20 @@
 <?php 
-// while ($post = each($_POST))
-// {
-// echo $post[0] . " = " . $post[1];
-// }
-// function cmp($a, $b)
-// {
-//     if ($a == $b) {
-//         return 0;
-//     }
-//     return ($a[1] < $b[1]) ? -1 : 1;
-// }
+$array = 0;
+function cmp($a, $b)
+{
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a[1] < $b[1]) ? -1 : 1;
+}
 
-// $a = array(array("hola","3"),array("hola2","1"),array("hola1","10"));
-// $jamon = array(array("JamonesABuenPrecio","23"),array("JamonesABuenPrecio","1"),array("JamonesABuenPrecio","3"));
-// print_r($jamon);
-// usort($jamon, "cmp");
-
-// foreach ($jamon as $jamon => $b) {
-//     echo "$b[0]: $b[1]\n";
-//     echo "<br>";
-// }
 function leerRanking(){
+	global $array;
 	$array_de_lineas = file("ranking.txt");
 	$longitude_de_array = count($array_de_lineas);
 	$array_persona = array();
 	$array_nombres_puntuacion = array();
+
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$array_guardar = preg_split("/,/", $array_de_lineas[$i]);
 		$x = $array_guardar[0];
@@ -35,14 +25,9 @@ function leerRanking(){
 		$array_persona = array();
 
 	}
-	// usort($array_nombres_puntuacion, 'sort_by_orden');
+	  $array = count($array_nombres_puntuacion);
+	usort($array_nombres_puntuacion, "cmp");
 
-	// usort($array_nombres_puntuacion, "cmp");
-	// foreach ($array_nombres_puntuacion as $array_nombres_puntuacion => $b) {
-	//     echo "$b[0]: $b[1]\n";
-	//     echo "<br>";
-	// }
-		// print_r($array_nombres_puntuacion);
 	return $array_nombres_puntuacion;
 	// $mapa[]=array('computadoras' => array('id' => '1','tipo' => 'R1'));
 }
@@ -55,11 +40,12 @@ fclose($file);
 
 }
 function ranking($array_nombres_puntuacion){
-	$array = count($array_nombres_puntuacion);
+		global $array;
+
 	$count = 0;
 	echo "<h4 align='center'>Ranking</h4>";
 	echo"<table style='border:2px solid black' align='center'>";
-	if ($count <=$array*2 ) {
+	if ($count <=$array) {
 	
 		for ($i=1; $i <=$array; $i++) { 
 			echo "<tr>\n";
@@ -77,7 +63,7 @@ function ranking($array_nombres_puntuacion){
 	}
 	echo"</table>";
 
-
+	$array = 0;
 
 }
 
