@@ -7,8 +7,13 @@ var cartaFinal;
 //GLOBAL END
 // Get the modal
 function modalOn(){
+	var contadorIntentos = document.getElementById("texto");
 	var modal = document.getElementById('modalUno');
     modal.style.display = "block";
+    contadorIntentos.value = contador_intentos;
+	console.log(contador_intentos);
+	console.log(contadorIntentos.value);
+
 }
 function spanDisplayNone(){
 	var texto = document.getElementById("textoFinal");
@@ -46,10 +51,14 @@ function hiddenPreguntaUsuarioAñadirRanking(){
 	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
 	var botonUsuarioRanking = document.getElementById("opcion");
 	var nombreUsuarioRanking = document.getElementById("añadirNombre");
+	var contadorIntentos = document.getElementById("texto");
 
 	preguntaUsuarioRanking.style.visibility = 'hidden';
 	botonUsuarioRanking.style.visibility = 'hidden';
 	nombreUsuarioRanking.style.visibility = 'hidden';
+	contadorIntentos.style.visibility = 'hidden';
+
+
 
 	preguntaUsuarioRanking.innerHTML = "Quieres añadir tu nombre al ranking?";
 
@@ -269,5 +278,5 @@ function fuegosArt(){
 }
 
 function hola() {
-	console.log("hola");
+return false;
 }

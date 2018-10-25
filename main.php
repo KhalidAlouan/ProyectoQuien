@@ -3,27 +3,28 @@
 	<script type="text/javascript" defer src="funciones.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
 
-	<div id="modalUno" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<h1 id="textoFinal"></h1>
-			<h3 id="preguntaAñadirUsuarioRanking"></h3>
-			<form action="ranking.php" method="post">
+
+<?php
+echo "
+	<div id='modalUno' class='modal'>
+		<div class='modal-content'>
+			<span class='close'>&times;</span>
+			<h1 id='textoFinal'></h1>
+			<h3 id='preguntaAñadirUsuarioRanking'></h3>
+			<form action='ranking.php' method='post'>
 				<input id='añadirNombre'type='text' name='añadirNombre'>
 				<input id='opcion'type='submit' value='Añadir'>
+				<input id='texto' name='contador' type='text'>
 			</form>
 
 		</div>
 	</div>
-</body>
-<?php
+";
 
 //Modo easy
-// echo "<label id='easy'>Modo:</lable>"; echo "<br>";
-// echo "<button onclick='hola()' id='easydos'>Easy</button>";
-
+echo "<label id='easy'>Modo:</label>"; echo "<br>";
+echo "<button onclick='hola()' id='easydos'>Easy</button>";
 //Mostrar el contador de preguntas
 echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
