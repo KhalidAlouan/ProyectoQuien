@@ -1,7 +1,7 @@
 //GLOBAL VAR
 var CARTA_SERVIDOR = document.getElementById("servCard");
-var contador_intentos = 0;
 var cartas = 11;
+var contador_intentos = 0;
 var cartaFinal;
 
 //GLOBAL END
@@ -34,8 +34,10 @@ window.onload = function addEvent(){
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
 		cartas[i].addEventListener("click",flip);
+		cartas[i].addEventListener("click",audio);
 	}
 }
+
 function hiddenPreguntaUsuarioAñadirRanking(){
 	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
 	var botonUsuarioRanking = document.getElementById("opcion");
@@ -76,18 +78,21 @@ function endGame(){
 		mostrarPreguntaUsuarioAñadirRanking();
 		texto.innerHTML = "Has ganado."
 
-
-		//modalGanar();
 	}else{
 		modalOn();
 		texto.innerHTML = "Has perdido."
 
-
-		//modalPerder();
-
 	}
-
 	
+}
+
+//Se encarga de añadir la class que permite el efecto de girar.
+function flip(element) {
+	cartaServidor = document.getElementById("servCard").id;
+	element = element.target.parentNode.parentNode;
+	if (element.id != cartaServidor) {
+    	element.classList.add("flipped");
+	}  
 }
 
 function comboBoxGafas(){
@@ -167,54 +172,29 @@ function comboBoxPelo(){
 	}	
 
 }
-//Se encarga de añadir la class que permite el efecto de girar.
-function flip(element) {
-	cartaServidor = document.getElementById("servCard").id;
-	element = element.target.parentNode.parentNode;
-	if (element.id != cartaServidor) {
-    	element.classList.add("flipped");
-	}  
-}
-
-//Funcion que se ejecuta nada mas cagar la pagina que añade la funcion flip() a las cartas.
-window.onload = function addEvent(){
-	var cartas = document.getElementsByClassName("card");
-	for (var i = 0 ; cartas.length -1 >= i; i++) {
-		cartas[i].addEventListener("click",flip);
-	}
-}
-
-function combo2(){
-	var sexo=document.getElementById("sexo");
-	var sexo2=sexo.options[sexo.selectedIndex].text;
-	var area=document.getElementById("area");
-	var s=document.getElementById("s").innerHTML;
-	
-	area.innerHTML=sexo+sexo2;
-
-}
 
 //Crea un objeto de tipo audio y que se ejecuta
 function audio() {
 	var audio = new Audio('latigo.mp3');
     audio.play();
+
 }
 
 // La siguiente función recoge el texto del primer select y 
 // lo mete en el textarea
 function combo(){
-	var sel=document.getElementById("combos");
-	var selected=sel.options[sel.selectedIndex].text;
-	var are=document.getElementById("area");
-	var gafas=document.getElementById("gafas").innerHTML;
-	
-	are.innerHTML=gafas+selected;
+	var parrafo=document.getElementById("parrafo");
+	var modal=document.getElementById("modal-error");
+	var combos = document.getElementById("gafas").value;
+    var sexo = document.getElementById("sexo").value;
+    var pelo = document.getElementById("pelo").value;
 
-	var combos = document.getElementById("combos").value;
+	var gafas = document.getElementById("gafas").value;
 	var sexo = document.getElementById("sexo").value;
 	var pelo = document.getElementById("pelo").value;
 
-	array_select = [combos,sexo,pelo];
+	array_select = [gafas,sexo,pelo];
+
 
 	var_contar_nulls = 0;
 
@@ -224,44 +204,33 @@ function combo(){
 		}
 	}
 
-	 if (var_contar_nulls <= 1) {
+	if (var_contar_nulls <= 1) {
     	modal.style.visibility="visible";
         modal.style.display="block";
-        document.getElementById("combos").selectedIndex=0;
+        document.getElementById("gafas").selectedIndex=0;
         document.getElementById("sexo").selectedIndex=0;
         document.getElementById("pelo").selectedIndex=0;
     }
+	
 
-    if (contador_intentos >= 1) {
+    if (contador_intentos>=1-1) {
     	desactivarModo();
     }
-
-		
 	contador_intentos++
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
-
-	/*if ( cont_cartas == cartas) {
-		alert("seguro?")
-	} else {
-		cont_cartas--;
-	}*/
-
 }
 
 function desactivarModo(){
-    var easy=document.getElementById("easy");
 	var easy2=document.getElementById("easydos");
-
-    
     easy2.disabled=true;
 }
 
 //Button que cierra el modal
-function CerrarModal(){
+function cerrarModal(){
 	var cerrar=document.getElementsByClassName("cerrar")[0];
-	var modal=document.getElementById("modal");
+	var modal=document.getElementById("modal-error");
 	
 	modal.style.visibility="hidden";
 	modal.style.display="none";
@@ -278,7 +247,12 @@ window.onclick=function(event){
 
 }
 
+
 //F-Artificiales
 function fuegosArt(){
 	location.href ="FireWorks.html"
+}
+
+function hola() {
+	console.log("hola");
 }
