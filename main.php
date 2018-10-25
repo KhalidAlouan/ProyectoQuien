@@ -86,6 +86,9 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 		$var_guardarGafasU = $g[2];
 		//Con la funcion trim estoy eliminando el \n del final de linea.
 		$var_guardarGafasUTrimmed = trim($var_guardarGafasU, " \n");
+		$var_guardarGafasUTrimmed = preg_replace('/\s+/', '', $var_guardarGafasU);
+
+
 
 		array_push($array_sexoU,$var_guardarSexoU);
 		array_push($array_peloU,$var_guardarPeloU);
