@@ -157,4 +157,14 @@
     text-decoration: none;
     cursor: pointer;
 }
-</style>
+
+body {
+  background-image: url(assets/wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: cyan;
+  font-family: Arial;
+
+}

@@ -3,6 +3,7 @@
 	<script type="text/javascript" defer src="funciones.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
+<body id="body">
 
 
 <?php
