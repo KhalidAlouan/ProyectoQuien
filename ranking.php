@@ -3,7 +3,23 @@
 // {
 // echo $post[0] . " = " . $post[1];
 // }
+function cmp($a, $b)
+{
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a[1] < $b[1]) ? -1 : 1;
+}
 
+$a = array(array("hola","3"),array("hola2","1"),array("hola1","10"));
+$jamon = array(array("JamonesABuenPrecio","23"),array("JamonesABuenPrecio","1"),array("JamonesABuenPrecio","3"));
+print_r($jamon);
+usort($jamon, "cmp");
+
+foreach ($jamon as $jamon => $b) {
+    echo "$b[0]: $b[1]\n";
+    echo "<br>";
+}
 function leerRanking(){
 	$array_de_lineas = file("ranking.txt");
 	$longitude_de_array = count($array_de_lineas);
@@ -21,13 +37,16 @@ function leerRanking(){
 	}
 	// usort($array_nombres_puntuacion, 'sort_by_orden');
 
-	print_r($array_nombres_puntuacion);
+	usort($array_nombres_puntuacion, "cmp");
+	foreach ($array_nombres_puntuacion as $array_nombres_puntuacion => $b) {
+	    echo "$b[0]: $b[1]\n";
+	    echo "<br>";
+	}
+		print_r($array_nombres_puntuacion);
 	return $array_nombres_puntuacion;
 	// $mapa[]=array('computadoras' => array('id' => '1','tipo' => 'R1'));
 }
-function sort_by_orden ($a, $b) {
-    return $a[1] - $b[1];
-}
+
 
 function escribirRanking(){
 $file = fopen("ranking.txt", "a+");

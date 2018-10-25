@@ -37,7 +37,11 @@ window.onload = function addEvent(){
 		cartas[i].addEventListener("click",audio);
 	}
 }
+function hiddenFireworks() {
+	var divFire = document.getElementsByClassName("pyro");
+		divFire.style.visibility = 'hidden';
 
+}
 function hiddenPreguntaUsuarioAñadirRanking(){
 	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
 	var botonUsuarioRanking = document.getElementById("opcion");
@@ -88,11 +92,22 @@ function endGame(){
 
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
-	cartaServidor = document.getElementById("servCard").id;
-	element = element.target.parentNode.parentNode;
-	if (element.id != cartaServidor) {
-    	element.classList.add("flipped");
-	}  
+	if (cartas!=0) {
+		element = element.target.parentNode.parentNode;
+		if(element.classList.contains("flipped")== false && element.id != CARTA_SERVIDOR.id ){
+			cartas--;
+		}
+		if (element.id != CARTA_SERVIDOR.id) {
+	    	element.classList.add("flipped");
+
+		}
+	}
+	if (cartas == 0){
+		endGame();
+	}
+	
+	
+
 }
 
 function comboBoxGafas(){

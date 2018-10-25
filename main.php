@@ -17,12 +17,12 @@
 
 		</div>
 	</div>
-
+</body>
 <?php
 
 //Modo easy
-echo "<label id='easy'>Modo:</lable>"; echo "<br>";
-echo "<button onclick='hola()' id='easydos'>Easy</button>";
+// echo "<label id='easy'>Modo:</lable>"; echo "<br>";
+// echo "<button onclick='hola()' id='easydos'>Easy</button>";
 
 //Mostrar el contador de preguntas
 echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
