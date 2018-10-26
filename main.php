@@ -1,3 +1,9 @@
+<?php 
+	//Abrimos la sesión
+	session_start()
+?>
+
+
 <html>
 <head>
 	<script type="text/javascript" defer src="funciones.js"></script>
@@ -126,7 +132,7 @@ echo "<h4 align='center'>Carta del Servidor</h4>";
 echo "<table style='border:2px solid black' align='center'";
 
 echo "<tr><td style='border:1px solid black'>
-<div class='container'>
+<div class='container_servidor'>
  <div id = 'servCard'class='card' >
     <div class='front'>
           <img class='img' src='assets/reverso/cardBack.jpg'/>

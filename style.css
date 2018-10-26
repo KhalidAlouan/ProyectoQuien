@@ -1,3 +1,16 @@
+body {
+  background-image: url(assets/wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: cyan;
+  font-family: Arial;
+
+}  
+
+
+
   #img:hover {
     filter: blur(5px);
   }
@@ -14,6 +27,15 @@
   .container {
       width: 220px;
       height: 260px;
+      -webkit-perspective: 800px;
+      -moz-perspective: 800px;
+      -o-perspective: 800px;
+      perspective: 800px;
+  }
+
+  .container_servidor {
+      width: 300px;
+      height: 350px;
       -webkit-perspective: 800px;
       -moz-perspective: 800px;
       -o-perspective: 800px;
@@ -158,13 +180,5 @@
     cursor: pointer;
 }
 
-body {
-  background-image: url(assets/wallpaper.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: 100%;
-  color: cyan;
-  font-family: Arial;
 
-}
+

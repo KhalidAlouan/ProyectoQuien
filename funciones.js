@@ -90,10 +90,12 @@ function endGame(){
 		modalOn();
 		mostrarPreguntaUsuarioAñadirRanking();
 		texto.innerHTML = "Has ganado."
+		sonidoVictoria();
 
 	}else{
 		modalOn();
-		texto.innerHTML = "Has perdido."
+		texto.innerHTML = "Has perdido.";
+		sonidoFracaso();
 
 	}
 	
@@ -115,8 +117,6 @@ function flip(element) {
 		endGame();
 	}
 	
-	
-
 }
 
 function comboBoxGafas(){
@@ -244,6 +244,8 @@ function combo(){
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
+	resetearCombos();
+
 }
 
 function desactivarModo(){
@@ -279,4 +281,18 @@ function fuegosArt(){
 
 function hola() {
 return false;
+}
+
+//Función que ejecuta el sonido de victoria
+function sonidoVictoria() {
+	var audio = new Audio("victoria.mp3");
+
+	audio.play();
+}
+
+//Función que ejecuta el sonido de derrota
+function sonidoFracaso() {
+	var audio = new Audio("fracaso.mp3");
+
+	audio.play();
 }
