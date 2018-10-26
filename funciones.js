@@ -1,5 +1,7 @@
-//GLOBAL VAR
+//GLOBAL VAR INMUTABLE
 var CARTA_SERVIDOR = document.getElementById("servCard");
+//GLOBAL VAR
+var easyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
@@ -32,10 +34,13 @@ window.onload = function addEvent(){
 	var cartas = document.getElementsByClassName("card");
 	var span = document.getElementsByClassName("close")[0];
 	var preguntar = document.getElementById("ferLaPregunta");
+	var easydos = document.getElementById('easydos');
 	span.addEventListener("click",spanDisplayNone);
 	preguntar.addEventListener("click", comboBoxSexo);
 	preguntar.addEventListener("click", comboBoxGafas);
 	preguntar.addEventListener("click", comboBoxPelo);
+	easydos.addEventListener('click', easyModeOn);
+
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
 		cartas[i].addEventListener("click",flip);
@@ -126,6 +131,10 @@ function comboBoxGafas(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				console.log("IfTrue")
+				easyModeComparacionGafasSiAfirmativo();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
 		}
@@ -277,6 +286,35 @@ function fuegosArt(){
 	location.href ="FireWorks.html"
 }
 
-function hola() {
-return false;
+
+function hiddenEasyButton() {
+	var easyLabel = document.getElementById('easy');
+	var easyButton  = document.getElementById('easydos');
+	easyLabel.style.visibility="hidden";
+	easyButton.style.visibility="hidden";
+
+
+
 }
+function easyModeOn() {
+	hiddenEasyButton();
+	easyMode = true;
+
+}
+
+function easyModeComparacionGafasSiAfirmativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'no'){
+				cartas[i].classList.add("flipped");
+
+			}	
+		}
+	}
+}
+	
+	
+// function easyModeComparacionGafasSiNegativo(){
+
+// }
