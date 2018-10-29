@@ -1,24 +1,32 @@
- <script type="text/javascript" defer src="funciones.js"></script>
- <link href="style.css" rel="stylesheet" type="text/css">
+<html>
+<head>
+	<script type="text/javascript" defer src="funciones.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
 
-<body>
-	
-	<div id="modalUno" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<h1 id="textoFinal"></h1>
-			<h3 id="preguntaAñadirUsuarioRanking"></h3>
-			<form action="ranking.php" method="post">
+
+<?php
+echo "
+	<div id='modalUno' class='modal'>
+		<div class='modal-content'>
+			<span class='close'>&times;</span>
+			<h1 id='textoFinal'></h1>
+			<h3 id='preguntaAñadirUsuarioRanking'></h3>
+			<form action='ranking.php' method='post'>
 				<input id='añadirNombre'type='text' name='añadirNombre'>
 				<input id='opcion'type='submit' value='Añadir'>
+				<input id='texto' name='contador' type='text'>
 			</form>
 
 		</div>
 	</div>
-</body>
+";
 
-<?php 
-
+//Modo easy
+echo "<label id='easy'>Modo:</label>"; echo "<br>";
+echo "<button id='easydos'>Easy</button>";
+//Mostrar el contador de preguntas
+echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
 
@@ -78,6 +86,9 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 		$var_guardarGafasU = $g[2];
 		//Con la funcion trim estoy eliminando el \n del final de linea.
 		$var_guardarGafasUTrimmed = trim($var_guardarGafasU, " \n");
+		$var_guardarGafasUTrimmed = preg_replace('/\s+/', '', $var_guardarGafasU);
+
+
 
 		array_push($array_sexoU,$var_guardarSexoU);
 		array_push($array_peloU,$var_guardarPeloU);
@@ -146,7 +157,6 @@ $contador = 0;
 for ($i=1; $i <=4; $i++) { 
 	echo "<tr>\n";
 	for ($j=1; $j <=3; $j++) { 
-		
 		echo "<td style='border:1px solid black'>
 			<div class='container'>
 			  <div class='card' >
@@ -158,14 +168,7 @@ for ($i=1; $i <=4; $i++) {
 			    </div>
 			  </div>
 			</div></td>";
-		$contador++;
-
-
-
-
-
-
-		
+		$contador++;	
 		
 	}
 	echo "</tr>";
@@ -209,17 +212,32 @@ echo "</select>";
 echo "<br>";
 echo "<br>";
 
-echo "<input id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
+echo "<input onclick='combo()' id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
 echo"<br>";
 echo "<br>";
 
 
 
-echo "<textarea rows='10' cols='50' id='area'>";
+echo "<textarea rows='4' cols='50' id='area'>";
 
 echo "</textarea>";
 
+echo "<br>";
+
+echo "<input type='button' value='Focs Artificials'onclick='fuegosArt()'>";
+echo "</input>";
 
 
+
+echo "<div id='modal-error' class='clasmodal'>";
+	echo "<div class='contenido-error'>";
+		echo "<span  class='cerrar-error'>";
+		echo "</span>";
+		echo "<p align='center'>Error: no puedes hacer mas de una pregunta</p>";
+		echo "<button onclick='cerrarModal()'>Cerrar";
+		echo "</button>";
+echo "</div>";
 
 ?>
+</body>
+</html>

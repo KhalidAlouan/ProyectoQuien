@@ -1,13 +1,21 @@
-//GLOBAL VAR
+//GLOBAL VAR INMUTABLE
 var CARTA_SERVIDOR = document.getElementById("servCard");
+//GLOBAL VAR
+var easyMode = false;
 var cartas = 11;
+var contador_intentos = 0;
 var cartaFinal;
 
 //GLOBAL END
 // Get the modal
 function modalOn(){
+	var contadorIntentos = document.getElementById("texto");
 	var modal = document.getElementById('modalUno');
     modal.style.display = "block";
+    contadorIntentos.value = contador_intentos;
+	console.log(contador_intentos);
+	console.log(contadorIntentos.value);
+
 }
 function spanDisplayNone(){
 	var texto = document.getElementById("textoFinal");
@@ -26,24 +34,36 @@ window.onload = function addEvent(){
 	var cartas = document.getElementsByClassName("card");
 	var span = document.getElementsByClassName("close")[0];
 	var preguntar = document.getElementById("ferLaPregunta");
+	var easydos = document.getElementById('easydos');
 	span.addEventListener("click",spanDisplayNone);
 	preguntar.addEventListener("click", comboBoxSexo);
 	preguntar.addEventListener("click", comboBoxGafas);
 	preguntar.addEventListener("click", comboBoxPelo);
+	easydos.addEventListener('click', easyModeOn);
+
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
 		cartas[i].addEventListener("click",flip);
+		cartas[i].addEventListener("click",audio);
 	}
 }
+function hiddenFireworks() {
+	var divFire = document.getElementsByClassName("pyro");
+		divFire.style.visibility = 'hidden';
 
+}
 function hiddenPreguntaUsuarioAñadirRanking(){
 	var preguntaUsuarioRanking = document.getElementById("preguntaAñadirUsuarioRanking");
 	var botonUsuarioRanking = document.getElementById("opcion");
 	var nombreUsuarioRanking = document.getElementById("añadirNombre");
+	var contadorIntentos = document.getElementById("texto");
 
 	preguntaUsuarioRanking.style.visibility = 'hidden';
 	botonUsuarioRanking.style.visibility = 'hidden';
 	nombreUsuarioRanking.style.visibility = 'hidden';
+	contadorIntentos.style.visibility = 'hidden';
+
+
 
 	preguntaUsuarioRanking.innerHTML = "Quieres añadir tu nombre al ranking?";
 
@@ -76,19 +96,14 @@ function endGame(){
 		mostrarPreguntaUsuarioAñadirRanking();
 		texto.innerHTML = "Has ganado."
 
-
-		//modalGanar();
 	}else{
 		modalOn();
 		texto.innerHTML = "Has perdido."
 
-
-		//modalPerder();
-
 	}
-
 	
 }
+
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
 	if (cartas!=0) {
@@ -109,8 +124,6 @@ function flip(element) {
 
 }
 
-
-
 function comboBoxGafas(){
 	var gafasSeleccionado = document.getElementById("gafas").value.toString();
 	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
@@ -118,6 +131,10 @@ function comboBoxGafas(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				console.log("IfTrue")
+				easyModeComparacionGafasSiAfirmativo();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
 		}
@@ -189,3 +206,115 @@ function comboBoxPelo(){
 
 }
 
+//Crea un objeto de tipo audio y que se ejecuta
+function audio() {
+	var audio = new Audio('latigo.mp3');
+    audio.play();
+
+}
+
+// La siguiente función recoge el texto del primer select y 
+// lo mete en el textarea
+function combo(){
+	var parrafo=document.getElementById("parrafo");
+	var modal=document.getElementById("modal-error");
+	var combos = document.getElementById("gafas").value;
+    var sexo = document.getElementById("sexo").value;
+    var pelo = document.getElementById("pelo").value;
+
+	var gafas = document.getElementById("gafas").value;
+	var sexo = document.getElementById("sexo").value;
+	var pelo = document.getElementById("pelo").value;
+
+	array_select = [gafas,sexo,pelo];
+
+
+	var_contar_nulls = 0;
+
+	for (var i = 0; i < array_select.length; i++) {
+		if (array_select[i] == "") {
+			var_contar_nulls++;
+		}
+	}
+
+	if (var_contar_nulls <= 1) {
+    	modal.style.visibility="visible";
+        modal.style.display="block";
+        document.getElementById("gafas").selectedIndex=0;
+        document.getElementById("sexo").selectedIndex=0;
+        document.getElementById("pelo").selectedIndex=0;
+    }
+	
+
+    if (contador_intentos>=1-1) {
+    	desactivarModo();
+    }
+	contador_intentos++
+
+	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
+
+}
+
+function desactivarModo(){
+	var easy2=document.getElementById("easydos");
+    easy2.disabled=true;
+}
+
+//Button que cierra el modal
+function cerrarModal(){
+	var cerrar=document.getElementsByClassName("cerrar")[0];
+	var modal=document.getElementById("modal-error");
+	
+	modal.style.visibility="hidden";
+	modal.style.display="none";
+		
+}
+
+//Función que cierra el modal al clicar fuera de el modal
+window.onclick=function(event){
+	var modal=document.getElementById("modal");
+	if (event.target==modal){
+		modal.style.visibility="hidden";
+		modal.style.display="none";
+	}
+
+}
+
+
+//F-Artificiales
+function fuegosArt(){
+	location.href ="FireWorks.html"
+}
+
+
+function hiddenEasyButton() {
+	var easyLabel = document.getElementById('easy');
+	var easyButton  = document.getElementById('easydos');
+	easyLabel.style.visibility="hidden";
+	easyButton.style.visibility="hidden";
+
+
+
+}
+function easyModeOn() {
+	hiddenEasyButton();
+	easyMode = true;
+
+}
+
+function easyModeComparacionGafasSiAfirmativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'no'){
+				cartas[i].classList.add("flipped");
+
+			}	
+		}
+	}
+}
+	
+	
+// function easyModeComparacionGafasSiNegativo(){
+
+// }
