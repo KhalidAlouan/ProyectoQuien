@@ -1,6 +1,6 @@
 <?php 
 	//Abrimos la sesión
-	session_start()
+	session_start();
 ?>
 
 
@@ -30,10 +30,12 @@ echo "
 ";
 
 //Modo easy
-echo "<label id='easy'>Modo:</label>"; echo "<br>";
+echo "<label id='easy'>Modo:</label>";
+echo "<br>";
 echo "<button onclick='hola()' id='easydos'>Easy</button>";
 //Mostrar el contador de preguntas
 echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
+
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
 

@@ -141,6 +141,7 @@ function comboBoxGafas(){
 
 	}	
 }
+
 function comboBoxSexo(){
 	var sexoSeleccionado = document.getElementById("sexo").value.toString();
 	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
@@ -159,8 +160,8 @@ function comboBoxSexo(){
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
 		}
-	
-
+		
+		
 	}	
 }
 
