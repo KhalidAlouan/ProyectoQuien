@@ -2,6 +2,7 @@
 var CARTA_SERVIDOR = document.getElementById("servCard");
 //GLOBAL VAR
 var easyMode = false;
+var veryEasyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
@@ -36,11 +37,14 @@ window.onload = function addEvent(){
 	var span = document.getElementsByClassName("close")[0];
 	var preguntar = document.getElementById("ferLaPregunta");
 	var easydos = document.getElementById('easydos');
+	var veryeasy = document.getElementById('veryeasy');
+
 	span.addEventListener("click",spanDisplayNone);
 	preguntar.addEventListener("click", comboBoxSexo);
 	preguntar.addEventListener("click", comboBoxGafas);
 	preguntar.addEventListener("click", comboBoxPelo);
 	easydos.addEventListener('click', easyModeOn);
+	veryeasy.addEventListener('click',easyModeOn);
 
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
@@ -258,10 +262,6 @@ function audio() {
 function combo(){
 	var parrafo=document.getElementById("parrafo");
 	var modal=document.getElementById("modal-error");
-	var combos = document.getElementById("gafas").value;
-    var sexo = document.getElementById("sexo").value;
-    var pelo = document.getElementById("pelo").value;
-
 	var gafas = document.getElementById("gafas").value;
 	var sexo = document.getElementById("sexo").value;
 	var pelo = document.getElementById("pelo").value;
@@ -289,7 +289,17 @@ function combo(){
     if (contador_intentos>=1-1) {
     	desactivarModo();
     }
-	contador_intentos++
+    contador_intentos ++;
+    if (easyMode == true) {
+		contador_intentos++;
+	}
+    if (var_contar_nulls == 3) {
+    	contador_intentos--
+    	 if (easyMode == true) {
+		contador_intentos--;
+	}
+    }
+
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
@@ -328,20 +338,29 @@ function fuegosArt(){
 
 
 function hiddenEasyButton() {
-	var easyLabel = document.getElementById('easy');
-	var easyButton  = document.getElementById('easydos');
-	easyLabel.style.visibility="hidden";
-	easyButton.style.visibility="hidden";
-
-
-
+	var label=document.getElementById("easy");
+	var selectModos=document.getElementById("selectModos");
+	label.style.visibility="hidden";
+	selectModos.style.visibility="hidden";
 }
+
+//MODE EASY
 function easyModeOn() {
 	hiddenEasyButton();
+	removeOnclickFlip();
+	var veryEasyModeOn = document.getElementById("selectModos").value.toString();
 	easyMode = true;
-
+	if (veryEasyModeOn == 'veryEasy') {
+				veryEasyMode = true;
+	}
 }
-//MODE EASY
+
+function removeOnclickFlip(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].removeEventListener("click", flip);
+	}
+}
 function easyModeComparacionGafasA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {

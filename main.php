@@ -24,7 +24,10 @@ echo "
 
 //Modo easy
 echo "<label id='easy'>Modo:</label>"; echo "<br>";
-echo "<button id='easydos'>Easy</button>";
+echo "<select id='selectModos'>";
+echo "<option id='easydos' value='easy'>Easy</option>";
+echo "<option id='veryeasy' value='veryEasy'>Very Easy</option>";
+echo "</select>";
 //Mostrar el contador de preguntas
 echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
@@ -176,6 +179,68 @@ for ($i=1; $i <=4; $i++) {
 
 echo"</table>";
 
+
+// sexo: hombre mujer , Es hombre? ; Es mujer
+// pelo: rubio moreno pelirrojo , Es rubio? ; Es moreno? ; Es pelirrojo?
+// gafas: si no , Tiene gafas? ; No tiene gafas?
+
+function leerConfigYSacarNombres(){
+	$array_de_lineas = file("config/config.txt");
+	$longitude_de_array = count($array_de_lineas);
+	$array_nombres_caracteristicas = array();
+
+	for ($i=0; $i <$longitude_de_array ; $i++) { 
+		$x = preg_split("/:/", $array_de_lineas[$i]);
+		$var_guardar_nombre = $x[0];
+		array_push($array_nombres_caracteristicas, $var_guardar_nombre);
+	}
+	print_r($array_nombres_caracteristicas);
+	return $array_nombres_caracteristicas;
+}
+function leerConfigYSacarElResto(){
+		$array_de_lineas = file("config/config.txt");
+	$longitude_de_array = count($array_de_lineas);
+	$array_resto = array();
+
+	for ($i=0; $i <$longitude_de_array ; $i++) { 
+		$x = preg_split("/:/", $array_de_lineas[$i]);
+		$var_guardar = $x[1];
+		array_push($array_resto, $var_guardar);
+	}
+	print_r($array_resto);
+	return $array_resto;
+}
+function separarArrayRestoYSacarOpciones($array_resto){
+	$longitude_de_array = count($array_resto);
+	$array_opciones = array();
+	for ($i=0; $i <$longitude_de_array ; $i++) { 
+		$x = preg_split("/,/", $array_resto[$i]);
+		$var_guardar = $x[0];
+		array_push($array_opciones, $var_guardar);
+	}
+	print_r($array_opciones);
+	return $array_opciones;
+}
+function separarArrayRestoYSacarPreguntas($array_resto){
+	$longitude_de_array = count($array_resto);
+	$array_preguntas = array();
+	for ($i=0; $i <$longitude_de_array ; $i++) { 
+		$x = preg_split("/,/", $array_resto[$i]);
+		$var_guardar = $x[1];
+		array_push($array_preguntas, $var_guardar);
+	}
+	print_r($array_preguntas);
+	return $array_preguntas;
+}
+
+$array_nombres_caracteristicas = leerConfigYSacarNombres();
+echo"<br>";
+$array_resto = leerConfigYSacarElResto();
+echo"<br>";
+$array_opciones = separarArrayRestoYSacarOpciones($array_resto);
+echo"<br>";
+$array_preguntas = separarArrayRestoYSacarPreguntas($array_resto);
+echo"<br>";
 
 
 echo"<br>";
