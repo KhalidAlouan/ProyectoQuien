@@ -225,6 +225,7 @@ function combo(){
 	for (var i = 0; i < array_select.length; i++) {
 		if (array_select[i] == "") {
 			var_contar_nulls++;
+
 		}
 	}
 
@@ -237,19 +238,31 @@ function combo(){
     }
 	
 
-    if (contador_intentos>=1-1) {
+    
+    contador_intentos++
+    if (var_contar_nulls==3) {
+    	contador_intentos--;
+    }
+
+    if (contador_intentos>=1) {
     	desactivarModo();
     }
-	contador_intentos++
+	
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
+	timer();
+
 
 }
 //Función que desactiva el combo-box de Modos
 
 function desactivarModo(){
-    var selectModos=document.getElementById("selectModos");
-    selectModos.disabled=true;
+   
+    //selectModos.disabled=true;
+    var label=document.getElementById("easy");
+	var selectModos=document.getElementById("selectModos");
+	label.style.visibility="hidden"
+    selectModos.style.visibility="hidden";
 
 }
 
@@ -282,35 +295,65 @@ function fuegosArt(){
 //Funcion que hace desaparecer el combo-box junto con el label al seleccionar un modo
 function hola() {
 // return false;
-	var label=document.getElementById("easy");
+	
 	var selectModos=document.getElementById("selectModos");
-	label.style.visibility="hidden";
-    selectModos.style.visibility="hidden";
+	
+    selectModos.disabled=true;
 
 }
 
-//20 segundos
+function timer(){
+		//20 segundos
+	// Set the date we're counting down to
+	var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+
+	  // Get todays date and time
+	  var now = new Date().getTime();
+
+	  // Find the distance between now and the count down date
+	  var distance = countDownDate - now;
+
+	  // Time calculations for days, hours, minutes and seconds
+	  var seconds = Math.floor((distance % (1000 * 20)) / 1000);
+
+	  // Display the result in the element with id="demo"
+	  document.getElementById("demo").innerHTML =  seconds + "s ";
+
+	  // If the count down is finished, write some text
+	  if (distance < 0) {
+	    clearInterval(x);
+	    document.getElementById("demo").innerHTML = "EXPIRED";
+	  }
+	}, 1000);
+
+}
+
+//20 segons para girar las cartas
 // Set the date we're counting down to
-var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+	var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
 
-// Update the count down every 1 second
-var x = setInterval(function() {
+	// Update the count down every 1 second
+	var x = setInterval(function() {
 
-  // Get todays date and time
-  var now = new Date().getTime();
+	  // Get todays date and time
+	  var now = new Date().getTime();
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
+	  // Find the distance between now and the count down date
+	  var distance = countDownDate - now;
 
-  // Time calculations for days, hours, minutes and seconds
-  var seconds = Math.floor((distance % (1000 * 20)) / 1000);
+	  // Time calculations for days, hours, minutes and seconds
+	  var seconds = Math.floor((distance % (1000 * 20)) / 1000);
 
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML =  seconds + "s ";
+	  // Display the result in the element with id="demo"
+	  var tiempo=document.getElementById("tiempo").innerHTML =  seconds + "s ";
+	  var parrafoTiempo = document.getElementById("parrafoTiempo");
+	  // If the count down is finished, write some text
+	  if (seconds <= 0) {
+	  	clearInterval();
+	  	tiempo.innerHTML.replace = "Se acabo el tiempo";
 
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
+	  }
+	}, 1000);
