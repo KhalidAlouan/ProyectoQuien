@@ -5,6 +5,7 @@ var easyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
+var cartasConFlipped = 0;
 
 //GLOBAL END
 // Get the modal
@@ -132,19 +133,28 @@ function comboBoxGafas(){
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 			if (easyMode == true) {
-				console.log("IfTrue")
-				easyModeComparacionGafasSiAfirmativo();
+				easyModeComparacionGafasA();
 			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasB();
+			}
+			
 		}
 	}
 	if (gafasSeleccionado == "no") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: No lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "no") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasA();
+			}
 		}
 	
 
@@ -157,16 +167,28 @@ function comboBoxSexo(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
 		if (atributoCartaSevidorSexo == "hombre") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoA();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoB();
+			}
 		}
 	}
 	if (sexoSeleccionado == "mujer") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es mujer?\n '
 		if (atributoCartaSevidorSexo == "mujer") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoA();
+			}
 		}
 	
 
@@ -180,16 +202,28 @@ function comboBoxPelo(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
 		if (atributoCartaSevidorPelo == "moreno") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloA();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloANegativo();
+			}
 		}
 	}
 	if (peloSeleccionado == "rubio") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es rubio?\n '
 		if (atributoCartaSevidorPelo == "rubio") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloBNegativo();
+			}
 		}
 
 	}	
@@ -197,8 +231,14 @@ function comboBoxPelo(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es pelirrojo?\n '
 		if (atributoCartaSevidorPelo == "pelirrojo") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloC();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloCNegativo();
+			}
 		}
 	
 
@@ -301,20 +341,133 @@ function easyModeOn() {
 	easyMode = true;
 
 }
-
-function easyModeComparacionGafasSiAfirmativo(){
+//MODE EASY
+function easyModeComparacionGafasA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 		if (cartas[i].id != CARTA_SERVIDOR.id ){
 			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'no'){
 				cartas[i].classList.add("flipped");
-
 			}	
 		}
 	}
+	endGameEasy();
 }
-	
-	
-// function easyModeComparacionGafasSiNegativo(){
+function easyModeComparacionGafasB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'si'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionSexoA(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('sexo') == 'mujer'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionSexoB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('sexo') == 'hombre'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloA(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'moreno'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloANegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'moreno'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'rubio'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
 
-// }
+}
+function easyModeComparacionPeloBNegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'rubio'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+
+}
+function easyModeComparacionPeloC(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'pelirrojo'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+
+}
+function easyModeComparacionPeloCNegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'pelirrojo'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+
+function endGameEasy(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].classList.contains("flipped")) {
+			cartasConFlipped++;
+
+		}
+	}
+	if (cartasConFlipped == 11) {
+		endGame();
+	}
+	cartasConFlipped = 0;
+}
+
+//END MODE EASY
