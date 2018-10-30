@@ -156,9 +156,9 @@ echo "<br>";
 
 
 shuffle($arrayImagenHecha);
-
+echo "<div align='center' >";
 echo "<h4 align='center'>Cartas del Cliente</h4>";
-echo"<table style='border:2px solid black' align='center'>";
+echo"<table style='border:4px solid black' align='center' id='fondoTablero'>";
 $contador = 0;
 for ($i=1; $i <=4; $i++) { 
 	echo "<tr>\n";
@@ -181,6 +181,7 @@ for ($i=1; $i <=4; $i++) {
 }
 
 echo"</table>";
+echo "</div>";
 
 
 

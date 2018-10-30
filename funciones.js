@@ -41,6 +41,7 @@ window.onload = function addEvent(){
 		cartas[i].addEventListener("click",flip);
 		cartas[i].addEventListener("click",audio);
 	}
+	tiempo();
 }
 function hiddenFireworks() {
 	var divFire = document.getElementsByClassName("pyro");
@@ -89,11 +90,12 @@ function endGame(){
 	if (cartaServidorImg.src == cartaFinal.src ) {
 		modalOn();
 		mostrarPreguntaUsuarioAñadirRanking();
-		texto.innerHTML = "Has ganado."
+		texto.innerHTML = "Has ganado.";
+		
 
 	}else{
 		modalOn();
-		texto.innerHTML = "Has perdido."
+		texto.innerHTML = "Has perdido.";
 
 	}
 	
@@ -235,11 +237,14 @@ function combo(){
         document.getElementById("gafas").selectedIndex=0;
         document.getElementById("sexo").selectedIndex=0;
         document.getElementById("pelo").selectedIndex=0;
+        contador_intentos--;
+
     }
 	
-
+	
     
     contador_intentos++
+
     if (var_contar_nulls==3) {
     	contador_intentos--;
     }
@@ -303,57 +308,76 @@ function hola() {
 }
 
 function timer(){
-		//20 segundos
-	// Set the date we're counting down to
-	var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+		
+	var cuentaAbajo = new Date("Jan 5, 2019 15:37:25").getTime();
 
-	// Update the count down every 1 second
+	
 	var x = setInterval(function() {
 
-	  // Get todays date and time
-	  var now = new Date().getTime();
+	 
+	  var fechaAhora = new Date().getTime();
 
-	  // Find the distance between now and the count down date
-	  var distance = countDownDate - now;
+	  
+	  var distancia = cuentaAbajo - fechaAhora;
 
-	  // Time calculations for days, hours, minutes and seconds
-	  var seconds = Math.floor((distance % (1000 * 20)) / 1000);
+	  
+	  var segundos = Math.floor((distancia % (1000 * 20)) / 1000);
 
-	  // Display the result in the element with id="demo"
-	  document.getElementById("demo").innerHTML =  seconds + "s ";
+	  
+	  var tiempo=document.getElementById("tiempo").innerHTML =  segundos + "s ";
+	  var parrafoTiempo = document.getElementById("parrafoTiempo");
+	  
+	  if (segundos <= 0) {
+	  	clearInterval(x);
+	  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
 
-	  // If the count down is finished, write some text
-	  if (distance < 0) {
-	    clearInterval(x);
-	    document.getElementById("demo").innerHTML = "EXPIRED";
 	  }
 	}, 1000);
 
 }
 
 //20 segons para girar las cartas
-// Set the date we're counting down to
-	var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
 
-	// Update the count down every 1 second
-	var x = setInterval(function() {
+function tiempo(){
+	var n = 5;
+	var l = document.getElementById("tiempo");
+	window.setInterval(function(){
+  	l.innerHTML = n;
+  	n--;
+	  	if (n == 0) {
+		  	window.clearInterval();
+		  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
 
-	  // Get todays date and time
-	  var now = new Date().getTime();
+		  }
+	},1000);
 
-	  // Find the distance between now and the count down date
-	  var distance = countDownDate - now;
 
-	  // Time calculations for days, hours, minutes and seconds
-	  var seconds = Math.floor((distance % (1000 * 20)) / 1000);
 
-	  // Display the result in the element with id="demo"
-	  var tiempo=document.getElementById("tiempo").innerHTML =  seconds + "s ";
-	  var parrafoTiempo = document.getElementById("parrafoTiempo");
-	  // If the count down is finished, write some text
-	  if (seconds <= 0) {
-	  	clearInterval();
-	  	tiempo.innerHTML.replace = "Se acabo el tiempo";
+	// var cuentaAbajo = new Date("Jan 5, 2019 00:00:00").getTime();
 
-	  }
-	}, 1000);
+	
+	// var x = setInterval(function() {
+
+	 
+	//   var fechaAhora = new Date().getTime();
+
+	  
+	//   var distancia = cuentaAbajo - fechaAhora;
+
+	  
+	//   var segundos = Math.floor((distancia % (1000 * 20)) / 1000);
+
+	  
+	//   var tiempo=document.getElementById("tiempo").innerHTML =  segundos + "s ";
+	//   var parrafoTiempo = document.getElementById("parrafoTiempo");
+	  
+	//   if (segundos <= 0) {
+	//   	clearInterval(x);
+	//   	parrafoTiempo.innerHTML = "Se acabo el tiempo";
+
+	//   }
+	// }, 1000);
+}
+
+
+	
