@@ -297,3 +297,7 @@ function sonidoFracaso() {
 
 	audio.play();
 }
+
+function crearPartida() {
+	
+}

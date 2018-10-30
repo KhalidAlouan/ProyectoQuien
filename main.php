@@ -1,6 +1,21 @@
 <?php 
 	//Abrimos la sesión
 	session_start();
+
+	if (!isset($_session["partida"])) {
+		crearPartida();
+	}
+
+
+
+
+	function crearPartida() {
+		$partida = [];
+
+		$_session["partida"] = $partida;
+	}
+
+
 ?>
 
 
@@ -124,6 +139,7 @@ function completarImagen ($array_nombres_imagenes_ordenados,$array_caracteristic
 	}
 	return $arrayImagenHecha;
 }
+
 
 $array_caracteristicas_completas_img= leerFicheroYExtraerCaracteristicas();
 $array_nombres_imagenes_ordenados= leerFicheroYExtraerNombre();
