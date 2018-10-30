@@ -40,9 +40,7 @@ window.onload = function addEvent(){
 	var veryeasy = document.getElementById('veryeasy');
 
 	span.addEventListener("click",spanDisplayNone);
-	preguntar.addEventListener("click", comboBoxSexo);
-	preguntar.addEventListener("click", comboBoxGafas);
-	preguntar.addEventListener("click", comboBoxPelo);
+	preguntar.addEventListener("click", comboAll);
 	easydos.addEventListener('click', easyModeOn);
 	veryeasy.addEventListener('click',easyModeOn);
 
@@ -128,9 +126,13 @@ function flip(element) {
 	
 
 }
-
+function comboAll(){
+	comboBoxGafas();
+	comboBoxSexo();
+	comboBoxPelo();
+}
 function comboBoxGafas(){
-	var gafasSeleccionado = document.getElementById("gafas").value.toString();
+	var gafasSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
 	if (gafasSeleccionado == "si") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
@@ -165,7 +167,7 @@ function comboBoxGafas(){
 	}	
 }
 function comboBoxSexo(){
-	var sexoSeleccionado = document.getElementById("sexo").value.toString();
+	var sexoSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
 	if (sexoSeleccionado == "hombre") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
@@ -200,7 +202,7 @@ function comboBoxSexo(){
 }
 
 function comboBoxPelo(){
-	var peloSeleccionado = document.getElementById("pelo").value.toString();
+	var peloSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorPelo =CARTA_SERVIDOR.children[1].children[0].getAttribute("pelo").toString();
 	if (peloSeleccionado == "moreno") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
