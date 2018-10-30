@@ -13,6 +13,7 @@
 
 
 <?php
+echo "<form>";
 echo "
 	<div id='modalUno' class='modal'>
 		<div class='modal-content'>
@@ -224,7 +225,6 @@ echo "<br>";
 echo "<input onclick='combo()' id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
 echo"<br>";
 echo "<br>";
-
 
 
 echo "<textarea rows='4' cols='50' id='area'>";

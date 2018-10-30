@@ -180,5 +180,7 @@ body {
     cursor: pointer;
 }
 
-
+#area {
+  resize: none;
+}
 
