@@ -131,8 +131,9 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 	$array_nombres_caracteristicas = leerConfigYSacarNombres();
 	print_r($array_nombres_caracteristicas);
 	$array_caracteristicas_completas_img = array();
+	$text = "<img class='img'"
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
-		$text = "<img class='img' sexo='$array_caracteristica0U[$i]' pelo='$array_caracteristica1U[$i]' gafas='$array_caracteristica2U[$i]' ";
+		$text = "<img class='img' sexo='$array_sexoU[$i]' pelo='$array_peloU[$i]' gafas='$array_gafasU[$i]' ";
 
 		array_push($array_caracteristicas_completas_img,$text);
 	}
