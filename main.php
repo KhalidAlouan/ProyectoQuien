@@ -1,24 +1,3 @@
-<?php 
-	//Abrimos la sesión
-	session_start();
-
-	if (!isset($_session["partida"])) {
-		crearPartida();
-	}
-
-
-
-
-	function crearPartida() {
-		$partida = [];
-
-		$_session["partida"] = $partida;
-	}
-
-
-?>
-
-
 <html>
 <head>
 	<script type="text/javascript" defer src="funciones.js"></script>
@@ -28,6 +7,10 @@
 
 
 <?php
+
+session_start();
+
+
 echo "<form>";
 echo "
 	<div id='modalUno' class='modal'>
@@ -144,12 +127,11 @@ function completarImagen ($array_nombres_imagenes_ordenados,$array_caracteristic
 $array_caracteristicas_completas_img= leerFicheroYExtraerCaracteristicas();
 $array_nombres_imagenes_ordenados= leerFicheroYExtraerNombre();
 $arrayImagenHecha = completarImagen($array_nombres_imagenes_ordenados,$array_caracteristicas_completas_img);
+
 shuffle($arrayImagenHecha);
 
 echo "<h4 align='center'>Carta del Servidor</h4>";
-
 echo "<table style='border:2px solid black' align='center'";
-
 echo "<tr><td style='border:1px solid black'>
 <div class='container_servidor'>
  <div id = 'servCard'class='card' >
@@ -162,10 +144,16 @@ echo "<tr><td style='border:1px solid black'>
   </div>
 </div>
 </td></tr>";
-
-
 echo "</table>";
 
+echo var_dump($_SESSION);
+
+
+//$_SESSION["arrayImagen"]=$arrayImagenHecha;
+
+
+
+//shuffle($_SESSION["arrayImagen"]);
 
 
 echo "<br>";
@@ -208,7 +196,7 @@ echo"<br>";
 echo"<br>";
 
 echo"<label id='g'> Accesorio:  </label>";
-echo"<select id='gafas'>";
+echo"<select onclick='select_gafas' id='gafas'>";
 echo"<option></option>";
 echo"<option value='no'>No lleva gafas?</option>";
 echo"<option value='si'>Lleva gafas?</option>";
@@ -218,7 +206,7 @@ echo "</select>";
 echo"<br>";
 
 echo"<label id='s'> Sexo:  </label>";
-echo"<select  id='sexo'>";
+echo"<select onclick='select_sexo'  id='sexo'>";
 echo"<option></option>";
 echo"<option value='hombre'>Es hombre?</option>";
 echo"<option value='mujer'>Es mujer?</option>";
@@ -227,7 +215,7 @@ echo "</select>";
 echo"<br>";
 
 echo"<label id='p'> Pelo: </label>";
-echo"<select id='pelo'>";
+echo"<select onclick='select_pelo' id='pelo'>";
 echo"<option></option>";
 echo"<option value='moreno'> Es moreno?</option>";
 echo"<option value='rubio'>Es rubio?</option>";
@@ -262,6 +250,9 @@ echo "<div id='modal-error' class='clasmodal'>";
 		echo "<button onclick='cerrarModal()'>Cerrar";
 		echo "</button>";
 echo "</div>";
+session_unset();
+
+
 
 ?>
 </body>

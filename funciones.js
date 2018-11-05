@@ -41,6 +41,19 @@ window.onload = function addEvent(){
 		cartas[i].addEventListener("click",flip);
 		cartas[i].addEventListener("click",audio);
 	}
+
+	var gafas = document.getElementById("gafas").value;
+	var sexo = document.getElementById("sexo").value;
+	var pelo = document.getElementById("pelo").value;
+
+
+	if (gafas == "" && sexo == "" && pelo == "") {
+		preguntar.disabled = true;
+	}
+
+
+
+
 }
 function hiddenFireworks() {
 	var divFire = document.getElementsByClassName("pyro");
@@ -96,6 +109,7 @@ function endGame(){
 		modalOn();
 		texto.innerHTML = "Has perdido.";
 		sonidoFracaso();
+
 
 	}
 	
@@ -215,8 +229,9 @@ function combo(){
     var pelo = document.getElementById("pelo").value;
 
 	var gafas = document.getElementById("gafas").value;
-	var sexo = document.getElementById("sexo").value;
-	var pelo = document.getElementById("pelo").value;
+
+	var pregunta = document.getElementById("ferLaPregunta");
+
 
 	array_select = [gafas,sexo,pelo];
 
@@ -236,7 +251,6 @@ function combo(){
         document.getElementById("sexo").selectedIndex=0;
         document.getElementById("pelo").selectedIndex=0;
     }
-	
 
     if (contador_intentos>=1-1) {
     	desactivarModo();
@@ -245,7 +259,6 @@ function combo(){
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
-	resetearCombos();
 
 }
 
@@ -298,6 +311,25 @@ function sonidoFracaso() {
 	audio.play();
 }
 
-function crearPartida() {
+function cotador() {
+	var contador = dic
+}
+
+function select_gafas() {
+	var gafas = document.getElementById("gafas").value;
+
+	var pregunta = document.getElementById("ferLaPregunta");
+
+	if (gafas != "") {
+		pregunta.disabled = false;
+	}
+
+}
+
+function select_sexo() {
+	
+}
+
+function select_pelo() {
 	
 }
