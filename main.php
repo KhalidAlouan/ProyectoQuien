@@ -7,7 +7,6 @@
 
 
 <?php
-
 session_start();
 
 
@@ -126,9 +125,18 @@ function completarImagen ($array_nombres_imagenes_ordenados,$array_caracteristic
 
 $array_caracteristicas_completas_img= leerFicheroYExtraerCaracteristicas();
 $array_nombres_imagenes_ordenados= leerFicheroYExtraerNombre();
-$arrayImagenHecha = completarImagen($array_nombres_imagenes_ordenados,$array_caracteristicas_completas_img);
+$arrayImagenHecha = null;
 
-shuffle($arrayImagenHecha);
+if (isset($_SESSION["arrayImagen"])) {
+	$arrayImagenHecha=$_SESSION["arrayImagen"];
+} else {
+	$arrayImagenHecha = completarImagen($array_nombres_imagenes_ordenados,$array_caracteristicas_completas_img);
+	shuffle($arrayImagenHecha);
+	$_SESSION["arrayImagen"]=$arrayImagenHecha;
+}
+
+
+
 
 echo "<h4 align='center'>Carta del Servidor</h4>";
 echo "<table style='border:2px solid black' align='center'";
@@ -139,21 +147,15 @@ echo "<tr><td style='border:1px solid black'>
           <img class='img' src='assets/reverso/cardBack.jpg'/>
     </div>
     <div class='back'>
-   		 $arrayImagenHecha[0]
+   		 $arrayImagenHecha[0];
     </div>
   </div>
 </div>
 </td></tr>";
 echo "</table>";
 
-echo var_dump($_SESSION);
 
 
-//$_SESSION["arrayImagen"]=$arrayImagenHecha;
-
-
-
-//shuffle($_SESSION["arrayImagen"]);
 
 
 echo "<br>";
@@ -163,7 +165,6 @@ echo "<br>";
 echo "<br>";
 
 
-shuffle($arrayImagenHecha);
 
 echo "<h4 align='center'>Cartas del Cliente</h4>";
 echo"<table style='border:2px solid black' align='center'>";
@@ -250,8 +251,6 @@ echo "<div id='modal-error' class='clasmodal'>";
 		echo "<button onclick='cerrarModal()'>Cerrar";
 		echo "</button>";
 echo "</div>";
-session_unset();
-
 
 
 ?>

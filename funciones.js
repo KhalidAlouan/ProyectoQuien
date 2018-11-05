@@ -40,17 +40,10 @@ window.onload = function addEvent(){
 
 		cartas[i].addEventListener("click",flip);
 		cartas[i].addEventListener("click",audio);
+		
 	}
 
-	var gafas = document.getElementById("gafas").value;
-	var sexo = document.getElementById("sexo").value;
-	var pelo = document.getElementById("pelo").value;
-
-
-	if (gafas == "" && sexo == "" && pelo == "") {
-		preguntar.disabled = true;
-	}
-
+	
 
 
 
@@ -109,6 +102,7 @@ function endGame(){
 		modalOn();
 		texto.innerHTML = "Has perdido.";
 		sonidoFracaso();
+		destroy();
 
 
 	}
@@ -311,25 +305,7 @@ function sonidoFracaso() {
 	audio.play();
 }
 
-function cotador() {
-	var contador = dic
-}
 
-function select_gafas() {
-	var gafas = document.getElementById("gafas").value;
-
-	var pregunta = document.getElementById("ferLaPregunta");
-
-	if (gafas != "") {
-		pregunta.disabled = false;
-	}
-
-}
-
-function select_sexo() {
-	
-}
-
-function select_pelo() {
-	
+function efectoCartasGiradas() {
+	if (car) {}
 }
