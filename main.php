@@ -2,6 +2,8 @@
 <head>
 	<script type="text/javascript" defer src="funciones.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
 </head>
 <body id="body">
 
@@ -9,7 +11,7 @@
 <?php
 session_start();
 
-
+echo "<div id='main'>";
 echo "<form>";
 echo "
 	<div id='modalUno' class='modal'>
@@ -28,11 +30,13 @@ echo "
 ";
 
 //Modo easy
-echo "<label id='easy'>Modo:</label>";
-echo "<br>";
-echo "<button onclick='hola()' id='easydos'>Easy</button>";
-//Mostrar el contador de preguntas
-echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
+echo "<div id='header'>";
+	echo "<label id='easy'>Modo:</label>";
+	echo "<br>";
+	echo "<button onclick='hola()' id='easydos'>Easy</button>";
+	//Mostrar el contador de preguntas
+	echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
+echo "</div>";
 
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
@@ -137,8 +141,14 @@ if (isset($_SESSION["arrayImagen"])) {
 
 
 
+echo "<div id='contenedorServidor'";
 
-echo "<h4 align='center'>Carta del Servidor</h4>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+
+echo "<h4 align='center'></h4>";
 echo "<table style='border:2px solid black' align='center'";
 echo "<tr><td style='border:1px solid black'>
 <div class='container_servidor'>
@@ -153,20 +163,14 @@ echo "<tr><td style='border:1px solid black'>
 </div>
 </td></tr>";
 echo "</table>";
+echo "</div>";
 
 
 
 
-
+echo "<div id='contenedorCliente'>";
 echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-
-
-
-echo "<h4 align='center'>Cartas del Cliente</h4>";
+echo "<h4 align='center'></h4>";
 echo"<table style='border:2px solid black' align='center'>";
 $contador = 0;
 for ($i=1; $i <=4; $i++) { 
@@ -190,8 +194,10 @@ for ($i=1; $i <=4; $i++) {
 }
 
 echo"</table>";
+echo "</div>";
 
 
+echo "<div id='preguntas'>";
 
 echo"<br>";
 echo"<br>";
@@ -240,6 +246,7 @@ echo "<br>";
 
 echo "<input type='button' value='Focs Artificials'onclick='fuegosArt()'>";
 echo "</input>";
+echo "</div>";
 
 
 
@@ -252,6 +259,8 @@ echo "<div id='modal-error' class='clasmodal'>";
 		echo "</button>";
 echo "</div>";
 
+
+echo "</div>";
 
 ?>
 </body>
