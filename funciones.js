@@ -135,6 +135,9 @@ function comboBoxGafas(){
 	var gafasSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
 	if (gafasSeleccionado == "si") {
+		if(veryEasyMode == true){
+			eliminarOpcion(gafasSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -150,6 +153,9 @@ function comboBoxGafas(){
 		}
 	}
 	if (gafasSeleccionado == "no") {
+		if(veryEasyMode == true){
+			eliminarOpcion(gafasSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: No lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "no") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -166,10 +172,16 @@ function comboBoxGafas(){
 
 	}	
 }
+
+
+
 function comboBoxSexo(){
 	var sexoSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
 	if (sexoSeleccionado == "hombre") {
+		if(veryEasyMode == true){
+			eliminarOpcion(sexoSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
 		if (atributoCartaSevidorSexo == "hombre") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -184,6 +196,9 @@ function comboBoxSexo(){
 		}
 	}
 	if (sexoSeleccionado == "mujer") {
+		if(veryEasyMode == true){
+			eliminarOpcion(sexoSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es mujer?\n '
 		if (atributoCartaSevidorSexo == "mujer") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -201,10 +216,24 @@ function comboBoxSexo(){
 	}	
 }
 
+function eliminarOpcion(opcion){
+	var opciones = document.getElementById("preguntasVarias");
+	for (var i = opciones.length - 1; i >= 0; i--) {
+		if (opciones.options[i].value == opcion) {
+			opciones.remove(i);
+		}
+	}
+
+}
+
+
 function comboBoxPelo(){
 	var peloSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorPelo =CARTA_SERVIDOR.children[1].children[0].getAttribute("pelo").toString();
 	if (peloSeleccionado == "moreno") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
 		if (atributoCartaSevidorPelo == "moreno") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -219,6 +248,9 @@ function comboBoxPelo(){
 		}
 	}
 	if (peloSeleccionado == "rubio") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es rubio?\n '
 		if (atributoCartaSevidorPelo == "rubio") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -234,6 +266,9 @@ function comboBoxPelo(){
 
 	}	
 	if (peloSeleccionado == "pelirrojo") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+		}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es pelirrojo?\n '
 		if (atributoCartaSevidorPelo == "pelirrojo") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -262,50 +297,15 @@ function audio() {
 // La siguiente función recoge el texto del primer select y 
 // lo mete en el textarea
 function combo(){
-	var parrafo=document.getElementById("parrafo");
-	var modal=document.getElementById("modal-error");
-	var gafas = document.getElementById("gafas").value;
-	var sexo = document.getElementById("sexo").value;
-	var pelo = document.getElementById("pelo").value;
-
-	array_select = [gafas,sexo,pelo];
-
-
-	var_contar_nulls = 0;
-
-	for (var i = 0; i < array_select.length; i++) {
-		if (array_select[i] == "") {
-			var_contar_nulls++;
-		}
+	if (contador_intentos>=1-1) {
+		desactivarModo();
 	}
-
-	if (var_contar_nulls <= 1) {
-    	modal.style.visibility="visible";
-        modal.style.display="block";
-        document.getElementById("gafas").selectedIndex=0;
-        document.getElementById("sexo").selectedIndex=0;
-        document.getElementById("pelo").selectedIndex=0;
-    }
-	
-
-    if (contador_intentos>=1-1) {
-    	desactivarModo();
-    }
-    contador_intentos ++;
-    if (easyMode == true) {
+	contador_intentos ++;
+	if (easyMode == true) {
 		contador_intentos++;
 	}
-    if (var_contar_nulls == 3) {
-    	contador_intentos--
-    	 if (easyMode == true) {
-		contador_intentos--;
-	}
-    }
-
-
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
-
-}
+	}
 
 function desactivarModo(){
 	var easy2=document.getElementById("easydos");

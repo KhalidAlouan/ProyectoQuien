@@ -129,9 +129,8 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 	}
 	//Aqui al separar todas las caracteristicas, contruimos otro array similar a una imagen en HTML para introducir por separado las caracteristicas.
 	$array_nombres_caracteristicas = leerConfigYSacarNombres();
-	print_r($array_nombres_caracteristicas);
 	$array_caracteristicas_completas_img = array();
-	$text = "<img class='img'"
+	$text = "<img class='img'";
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$text = "<img class='img' sexo='$array_sexoU[$i]' pelo='$array_peloU[$i]' gafas='$array_gafasU[$i]' ";
 
