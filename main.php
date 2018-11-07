@@ -374,7 +374,7 @@ echo "<div id='preguntas'>";
 
 
 
-	echo "<textarea rows='4' cols='50' id='area'>";
+	echo "<textarea readonly='readonly' rows='4' cols='50' id='area'>";
 
 	echo "</textarea>";
 
