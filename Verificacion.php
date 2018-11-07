@@ -129,9 +129,7 @@
 		$x = preg_split("/:/", $array_config[$i]);
 		$var_guardar_atr_config = $x[0];
 		array_push($array_config_separada, $var_guardar_atr_config);
-
 	}
-
 
 	//Recorrer el array de sexos para ver si todos los elemtnos son iguales que el atributo del config.txt
 
