@@ -1,82 +1,142 @@
-  #img:hover {
-    filter: blur(5px);
-  }
-  #tdd{
-      margin-right: 50px;
-      margin-top: 10px;
-  }
-  .img {
-      width: 100%;
-      height: 100%;
-  }
-    /*flip*/
+body {
+  background-image: url(assets/wallpaper1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: cyan;
+  font-family: Arial;
 
-  .container {
-      width: 160px;
-      height: 160px;
-      -webkit-perspective: 800px;
-      -moz-perspective: 800px;
-      -o-perspective: 800px;
-      perspective: 800px;
-  }
-  .card {
-      width: 100%;
-      height: 100%;
-      -webkit-transition: -webkit-transform 1s;
-      -moz-transition: -moz-transform 1s;
-      -o-transition: -o-transform 1s;
-      transition: transform 1s;
-      -webkit-transform-style: preserve-3d;
-      -moz-transform-style: preserve-3d;
-      -o-transform-style: preserve-3d;
-      transform-style: preserve-3d;
-      -webkit-transform-origin: 50% 50%;
-  }
-  .card div {
-      width: 100%;
-      height: 100%;
-      display: block;
-      text-align: center;
-      font-weight: bold;
-      position: absolute;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
-  }
-  .card .front {
-       
-  }
-
-  .card .back {
-      -webkit-transform: rotateY( 180deg );
-      -moz-transform: rotateY( 180deg );
-      -o-transform: rotateY( 180deg );
-      transform: rotateY( 180deg );
-  }
-  .card.flipped {
-      -webkit-transform: rotateY( 180deg );
-      -moz-transform: rotateY( 180deg );
-      -o-transform: rotateY( 180deg );
-      transform: rotateY( 180deg );
-  }
-
-  /*end flip*/
-
-#modal-error {
-    visibility: hidden;
-    display: none; 
-    position: fixed; 
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+}
+#tablero {
+  background-color: red;
 }
 
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+#header {
+  width: 100%;
+  height: 10%;
+
+}
+
+#contenedorServidor {
+  float: left;
+  width: 50%;
+  height: 60%;
+
+}
+
+#contenedorCliente {
+  float: right;
+  width: 50%;
+  height: 60%;
+
+}
+
+#preguntas {
+  display: inline-block;
+  width: 100%;
+  height: 30%;
+}
+
+
+#img:hover {
+  filter: blur(5px);
+}
+
+#tdd{
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+/*flip*/
+
+.container {
+  width: 125px;
+  height: 100px;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+}
+
+.container_servidor {
+  width: 300px;
+  height: 350px;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
+}
+
+.card div {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card .front {
+       
+}
+
+.card .back {
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+      -o-transform: rotateY( 180deg );
+      transform: rotateY( 180deg );
+  }
+
+.card.flipped {
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+}
+
+/*end flip*/
+
+#modal-error {
+  visibility: hidden;
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
 
 .contenido-error {
     position: relative;
@@ -112,9 +172,7 @@
 #contador {
   top: 0px;
   position: absolute;
-  right: 5px;
-  background-color: red;
-  position: fixed;
+  right: 10px;
 }
 
 
@@ -158,17 +216,134 @@
     cursor: pointer;
 }
 
-/* Tablero*/
-#fondoTablero{
-  background-image: url('fondoDiv.jpg');
-  border-radius: 10px;
-  
-  
-  
+#area {
+  resize: none;
 }
 
-/*FireWorks*/
+@media screen and (max-width: 900px) {
+  body {
+    background-size: auto;
+  }
+  #main {
+    width: 100%;
+  }
+
+  #header {
+    width: 100%;
+  }
+
+  #contenedorServidor {
+    width: 100%;
+  }
+
+  #contenedorCliente {
+    width: 100%;
+  }
+
+  #preguntas {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  body {
+    background-size: auto;
+  }
+  #main {
+    width: 100%;
+  }
+
+  #header {
+    width: 100%;
+  }
+
+  #contenedorServidor {
+    width: 100%;
+  }
+
+  #contenedorCliente {
+    width: 100%;
+  }
+
+  #preguntas {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  body {
+    background-size: auto;
+  }
+  #main {
+    width: 100%;
+  }
+
+  #header {
+    width: 100%;
+  }
+
+  #contenedorServidor {
+    width: 100%;
+    height: 25%;
+  }
+
+  #contenedorCliente {
+    width: 100%;
+    height: 33%;
+  }
+
+  #preguntas {
+    width: 100%;
+  }
+
+  .container {
+  width: 62px;
+  height: 50px;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+}
+
+.container_servidor {
+  width: 150px;
+  height: 175px;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+}
+
+.
+
+}
 
 
 
-</style>
+/*
+@media screen and (max-width: 1024px), (max-height: 1366px ) {
+  #main {
+    width: 100%;
+  }
+
+  body {
+    background-size: auto;
+  }
+
+  #preguntas {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 360px), (max-height: 640px ) {
+  .container {
+    width: 100px;
+    height: 100px;
+  }
+  .container_servidor {
+    width: 100px;
+    height: 100px;
+  }
+}
+*/

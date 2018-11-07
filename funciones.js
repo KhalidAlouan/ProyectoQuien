@@ -1,10 +1,14 @@
-//GLOBAL VAR
+//GLOBAL VAR INMUTABLE
 var CARTA_SERVIDOR = document.getElementById("servCard");
+//GLOBAL VAR
+var easyMode = false;
+var veryEasyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
-
+var cartasConFlipped = 0;
 //GLOBAL END
+
 // Get the modal
 function modalOn(){
 	var contadorIntentos = document.getElementById("texto");
@@ -26,23 +30,33 @@ function spanDisplayNone(){
 	}
 
 }
+
+
 //Funcion que se ejecuta nada mas cagar la pagina que añade todos los eventos necesarios.
 window.onload = function addEvent(){
 	hiddenPreguntaUsuarioAñadirRanking();
 	var cartas = document.getElementsByClassName("card");
 	var span = document.getElementsByClassName("close")[0];
 	var preguntar = document.getElementById("ferLaPregunta");
+	var easydos = document.getElementById('easydos');
+	var veryeasy = document.getElementById('veryeasy');
+
+	preguntar.disabled = true;
+
 	span.addEventListener("click",spanDisplayNone);
-	preguntar.addEventListener("click", comboBoxSexo);
-	preguntar.addEventListener("click", comboBoxGafas);
-	preguntar.addEventListener("click", comboBoxPelo);
+	preguntar.addEventListener("click", comboAll);
+	easydos.addEventListener('click', easyModeOn);
+	veryeasy.addEventListener('click',easyModeOn);
+
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 
 		cartas[i].addEventListener("click",flip);
 		cartas[i].addEventListener("click",audio);
 	}
-	tiempo();
 }
+
+
+
 function hiddenFireworks() {
 	var divFire = document.getElementsByClassName("pyro");
 		divFire.style.visibility = 'hidden';
@@ -90,13 +104,13 @@ function endGame(){
 	if (cartaServidorImg.src == cartaFinal.src ) {
 		modalOn();
 		mostrarPreguntaUsuarioAñadirRanking();
-		texto.innerHTML = "Has ganado.";
-		
+		texto.innerHTML = "Has ganado."
+		sonidoVictoria();
 
 	}else{
 		modalOn();
-		texto.innerHTML = "Has perdido.";
-
+		texto.innerHTML = "Has perdido."
+		sonidoFracaso();
 	}
 	
 }
@@ -120,46 +134,75 @@ function flip(element) {
 	
 
 }
-
+function comboAll(){
+	comboBoxGafas();
+	comboBoxSexo();
+	comboBoxPelo();
+}
 function comboBoxGafas(){
-	var gafasSeleccionado = document.getElementById("gafas").value.toString();
+	var gafasSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
 	if (gafasSeleccionado == "si") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasA();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasB();
+			}
+			
 		}
 	}
 	if (gafasSeleccionado == "no") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: No lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "no") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionGafasA();
+			}
 		}
 	
 
 	}	
 }
 function comboBoxSexo(){
-	var sexoSeleccionado = document.getElementById("sexo").value.toString();
+	var sexoSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
 	if (sexoSeleccionado == "hombre") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
 		if (atributoCartaSevidorSexo == "hombre") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoA();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoB();
+			}
 		}
 	}
 	if (sexoSeleccionado == "mujer") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es mujer?\n '
 		if (atributoCartaSevidorSexo == "mujer") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionSexoA();
+			}
 		}
 	
 
@@ -167,22 +210,34 @@ function comboBoxSexo(){
 }
 
 function comboBoxPelo(){
-	var peloSeleccionado = document.getElementById("pelo").value.toString();
+	var peloSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorPelo =CARTA_SERVIDOR.children[1].children[0].getAttribute("pelo").toString();
 	if (peloSeleccionado == "moreno") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
 		if (atributoCartaSevidorPelo == "moreno") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloA();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloANegativo();
+			}
 		}
 	}
 	if (peloSeleccionado == "rubio") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es rubio?\n '
 		if (atributoCartaSevidorPelo == "rubio") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloB();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloBNegativo();
+			}
 		}
 
 	}	
@@ -190,8 +245,14 @@ function comboBoxPelo(){
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es pelirrojo?\n '
 		if (atributoCartaSevidorPelo == "pelirrojo") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloC();
+			}
 		}else{
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Negativo\n';
+			if (easyMode == true) {
+				easyModeComparacionPeloCNegativo();
+			}
 		}
 	
 
@@ -211,64 +272,35 @@ function audio() {
 function combo(){
 	var parrafo=document.getElementById("parrafo");
 	var modal=document.getElementById("modal-error");
-	var combos = document.getElementById("gafas").value;
-    var sexo = document.getElementById("sexo").value;
-    var pelo = document.getElementById("pelo").value;
 
-	var gafas = document.getElementById("gafas").value;
-	var sexo = document.getElementById("sexo").value;
-	var pelo = document.getElementById("pelo").value;
-
-	array_select = [gafas,sexo,pelo];
-
-
-	var_contar_nulls = 0;
-
-	for (var i = 0; i < array_select.length; i++) {
-		if (array_select[i] == "") {
-			var_contar_nulls++;
-
-		}
-	}
-
-	if (var_contar_nulls <= 1) {
-    	modal.style.visibility="visible";
-        modal.style.display="block";
-        document.getElementById("gafas").selectedIndex=0;
-        document.getElementById("sexo").selectedIndex=0;
-        document.getElementById("pelo").selectedIndex=0;
-        contador_intentos--;
-
-    }
-	
-	
-    
-    contador_intentos++
-
-    if (var_contar_nulls==3) {
-    	contador_intentos--;
-    }
-
-    if (contador_intentos>=1) {
+	if (contador_intentos>=1-1) {
     	desactivarModo();
     }
-	
+
+
+
+    contador_intentos ++;
+
+    if (easyMode == true) {
+		contador_intentos++;
+	}
+    
+    /*if (var_contar_nulls == 3) {
+    	contador_intentos--
+    	if (easyMode == true) {
+		contador_intentos--;
+		}
+    }*/
+  
+
 
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
-	timer();
-
 
 }
-//Función que desactiva el combo-box de Modos
 
 function desactivarModo(){
-   
-    //selectModos.disabled=true;
-    var label=document.getElementById("easy");
-	var selectModos=document.getElementById("selectModos");
-	label.style.visibility="hidden"
-    selectModos.style.visibility="hidden";
-
+	var easy2=document.getElementById("easydos");
+    easy2.disabled=true;
 }
 
 //Button que cierra el modal
@@ -280,6 +312,21 @@ function cerrarModal(){
 	modal.style.display="none";
 		
 }
+
+//Función que ejecuta el sonido de victoria
+function sonidoVictoria() {
+	var audio = new Audio("victoria.mp3");
+
+	audio.play();
+}
+
+//Función que ejecuta el sonido de derrota
+function sonidoFracaso() {
+	var audio = new Audio("fracaso.mp3");
+
+	audio.play();
+}
+
 
 //Función que cierra el modal al clicar fuera de el modal
 window.onclick=function(event){
@@ -297,87 +344,167 @@ function fuegosArt(){
 	location.href ="FireWorks.html"
 }
 
-//Funcion que hace desaparecer el combo-box junto con el label al seleccionar un modo
-function hola() {
-// return false;
-	
+
+function hiddenEasyButton() {
+	var label=document.getElementById("easy");
 	var selectModos=document.getElementById("selectModos");
-	
-    selectModos.disabled=true;
-
+	label.style.visibility="hidden";
+	selectModos.style.visibility="hidden";
 }
 
-function timer(){
-		
-	var cuentaAbajo = new Date("Jan 5, 2019 15:37:25").getTime();
-
-	
-	var x = setInterval(function() {
-
-	 
-	  var fechaAhora = new Date().getTime();
-
-	  
-	  var distancia = cuentaAbajo - fechaAhora;
-
-	  
-	  var segundos = Math.floor((distancia % (1000 * 20)) / 1000);
-
-	  
-	  var tiempo=document.getElementById("tiempo").innerHTML =  segundos + "s ";
-	  var parrafoTiempo = document.getElementById("parrafoTiempo");
-	  
-	  if (segundos <= 0) {
-	  	clearInterval(x);
-	  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
-
-	  }
-	}, 1000);
-
+//MODE EASY
+function easyModeOn() {
+	hiddenEasyButton();
+	removeOnclickFlip();
+	var veryEasyModeOn = document.getElementById("selectModos").value.toString();
+	easyMode = true;
+	if (veryEasyModeOn == 'veryEasy') {
+				veryEasyMode = true;
+	}
 }
 
-//20 segons para girar las cartas
+function removeOnclickFlip(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].removeEventListener("click", flip);
+	}
+}
+function easyModeComparacionGafasA(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'no'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionGafasB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('gafas') == 'si'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionSexoA(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('sexo') == 'mujer'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionSexoB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('sexo') == 'hombre'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloA(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'moreno'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloANegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'moreno'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
+}
+function easyModeComparacionPeloB(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'rubio'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
 
-function tiempo(){
-	var n = 5;
-	var l = document.getElementById("tiempo");
-	window.setInterval(function(){
-  	l.innerHTML = n;
-  	n--;
-	  	if (n == 0) {
-		  	window.clearInterval();
-		  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
+}
+function easyModeComparacionPeloBNegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'rubio'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
 
-		  }
-	},1000);
+}
+function easyModeComparacionPeloC(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') != 'pelirrojo'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
 
-
-
-	// var cuentaAbajo = new Date("Jan 5, 2019 00:00:00").getTime();
-
-	
-	// var x = setInterval(function() {
-
-	 
-	//   var fechaAhora = new Date().getTime();
-
-	  
-	//   var distancia = cuentaAbajo - fechaAhora;
-
-	  
-	//   var segundos = Math.floor((distancia % (1000 * 20)) / 1000);
-
-	  
-	//   var tiempo=document.getElementById("tiempo").innerHTML =  segundos + "s ";
-	//   var parrafoTiempo = document.getElementById("parrafoTiempo");
-	  
-	//   if (segundos <= 0) {
-	//   	clearInterval(x);
-	//   	parrafoTiempo.innerHTML = "Se acabo el tiempo";
-
-	//   }
-	// }, 1000);
+}
+function easyModeComparacionPeloCNegativo(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].id != CARTA_SERVIDOR.id ){
+			if(cartas[i].children[0].children[0].getAttribute('pelo') == 'pelirrojo'){
+				cartas[i].classList.add("flipped");
+			}	
+		}
+	}
+	endGameEasy();
 }
 
+function endGameEasy(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		if (cartas[i].classList.contains("flipped")) {
+			cartasConFlipped++;
 
-	
+		}
+	}
+	if (cartasConFlipped == 11) {
+		endGame();
+	}
+	cartasConFlipped = 0;
+}
+
+//END MODE EASY
+
+function activarBoton(){
+	var lista = document.getElementById("preguntasVarias");
+	var boton = document.getElementById("ferLaPregunta");
+	if(lista.selectedIndex !=0 )
+	  boton.disabled = false;
+	else{
+	  boton.disabled = true;
+	}
+}

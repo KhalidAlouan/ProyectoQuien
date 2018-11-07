@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+<body>
 <?php 
 $array = 0;
 function cmp($a, $b)
@@ -18,7 +22,7 @@ function leerRanking(){
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$array_guardar = preg_split("/,/", $array_de_lineas[$i]);
 		$x = $array_guardar[0];
-		$y = $array_guardar[1];
+		$y = intval($array_guardar[1]);
 		array_push($array_persona,$x); 
 		array_push($array_persona,$y); 
 		array_push($array_nombres_puntuacion, $array_persona);
@@ -71,3 +75,5 @@ escribirRanking();
 $array_nombres_puntuacion = leerRanking();
 ranking($array_nombres_puntuacion);
 ?>
+</body>
+</html>
