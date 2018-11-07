@@ -111,6 +111,7 @@ function endGame(){
 		modalOn();
 		texto.innerHTML = "Has perdido."
 		sonidoFracaso();
+		location.href="destroy.php";
 	}
 	
 }
@@ -277,8 +278,6 @@ function combo(){
     	desactivarModo();
     }
 
-
-
     contador_intentos ++;
 
     if (easyMode == true) {
@@ -292,8 +291,6 @@ function combo(){
 		}
     }*/
   
-
-
 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
 }

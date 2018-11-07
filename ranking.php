@@ -74,6 +74,9 @@ function ranking($array_nombres_puntuacion){
 escribirRanking();
 $array_nombres_puntuacion = leerRanking();
 ranking($array_nombres_puntuacion);
+
+echo "<a href='destroy.php'> Volver a jugar</a>";
+
 ?>
 </body>
 </html>

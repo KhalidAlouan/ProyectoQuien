@@ -69,8 +69,8 @@ body {
 }
 
 .container_servidor {
-  width: 300px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   -o-perspective: 800px;

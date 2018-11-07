@@ -201,9 +201,7 @@ echo "</div>";
 echo "<div id='contenedorCliente'>";
 echo "<br>";
 echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
+
 
 echo"<table style='border:2px solid black' align='center'>";
 $contador = 0;
