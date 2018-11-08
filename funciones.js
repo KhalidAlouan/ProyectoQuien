@@ -6,6 +6,7 @@ var veryEasyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
+var interval;
 
 //GLOBAL END
 
@@ -540,7 +541,8 @@ function tiempo(){
 	activateOnclicAudio();
 	
 	clearInterval(interval);
-	var interval=setInterval(function(){
+	clearTimeout(interval);
+	interval=setInterval(function(){
   	tiempo.innerHTML = segundos;
   	segundos--;
 	  	if (segundos <= -1) {
