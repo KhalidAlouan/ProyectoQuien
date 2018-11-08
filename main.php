@@ -2,17 +2,23 @@
 <head>
 	<script type="text/javascript" defer src="funciones.js"></script>
 	<link href="style.css" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 </head>
+<body id="body">
 
-<body>
+
 <?php
+session_start();
+
+echo "<div id='main'>";
+
 echo "
 	<div id='modalUno' class='modal'>
 		<div class='modal-content'>
 			<span class='close'>&times;</span>
 			<h1 id='textoFinal'></h1>
 			<h3 id='preguntaAñadirUsuarioRanking'></h3>
-			<form action='ranking.php' method='post'>
+			<form action='FireWorks.php' method='post'>
 				<input id='añadirNombre'type='text' name='añadirNombre'>
 				<input id='opcion'type='submit' value='Añadir'>
 				<input id='texto' name='contador' type='text'>
@@ -22,17 +28,22 @@ echo "
 	</div>
 ";
 
-//Modo easy
-echo "<label id='easy'>Modo:</label>"; echo "<br>";
-echo "<select id='selectModos'>";
-echo "<option onclick='hola()' id='easydos'>Easy</option>";
-echo "<option onclick='hola()' id='veryeasy'>Very Easy</option>";
-echo "</select>";
-//Tiempo
-echo "<p id='tiempo'></p>";
-echo "<p id='parrafoTiempo'></p>";
-//Mostrar el contador de preguntas
-echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
+echo "<div id='header'>";
+	//Modo easy
+	echo "<label id='easy'>Modo:</label>";
+	echo "<br>";
+	echo "<select id='selectModos'>";
+	echo "<option id='easydos' value='easy'>Easy</option>";
+	echo "<option id='veryeasy' value='veryEasy'>Very Easy</option>";
+	echo "</select>";
+
+	//Timer
+	echo "<p align='center' id='tiempo'> </p>";
+
+	//Mostrar el contador de preguntas
+	echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
+echo "</div>";
+
 //Funcion que lee el archivo imatges.txt para extraer linea por linea el nombre de la imagen.
 function leerFicheroYExtraerNombre(){
 
@@ -59,6 +70,7 @@ function leerFicheroYExtraerCaracteristicas(){
 		array_push($array_caracteristicas_ordenadas,$var_guardar_caracteristicas);
 	}
 	$array_caracteristicas_completas_img= separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_array);
+
 	return $array_caracteristicas_completas_img;
 
 }
@@ -72,6 +84,7 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 	// print_r($array_caracteristica0);
 	// print_r($array_caracteristica1);
 	// print_r($array_caracteristica2);
+
 	$array_sexo = array();
 	$array_pelo = array();
 	$array_gafas = array();
@@ -84,14 +97,18 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 			// print_r($array_caracteristica0);
 			// print_r($array_caracteristica1);
 			// print_r($array_caracteristica2);
+
+
 		}
 		$var_guardarSexo = $x[0];
 		$var_guardarPelo = $x[1];
 		$var_guardarGafas = $x[2];
+
 		array_push($array_sexo,$var_guardarSexo);
 		array_push($array_pelo,$var_guardarPelo);
 		array_push($array_gafas,$var_guardarGafas);
 	}
+
 	for ($i=0; $i < $numeroCaracteristicas; $i++) { 
 		 ${'array_caracteristica'.$i."U"} = array();
 	}
@@ -110,26 +127,30 @@ function separarCaracteristicas($array_caracteristicas_ordenadas,$longitude_de_a
 		$s = preg_split("/ /", $array_sexo[$i]);
 		$p = preg_split("/ /", $array_pelo[$i]);
 		$g = preg_split("/ /", $array_gafas[$i]);
+
 		$var_guardarSexoU = $s[2];
 		$var_guardarPeloU = $p[2];
 		$var_guardarGafasU = $g[2];
 		//Con la funcion trim estoy eliminando el \n del final de linea.
 		$var_guardarGafasUTrimmed = trim($var_guardarGafasU, " \n");
 		$var_guardarGafasUTrimmed = preg_replace('/\s+/', '', $var_guardarGafasU);
+
+
+
 		array_push($array_sexoU,$var_guardarSexoU);
 		array_push($array_peloU,$var_guardarPeloU);
 		array_push($array_gafasU,$var_guardarGafasUTrimmed);
 	}
 	//Aqui al separar todas las caracteristicas, contruimos otro array similar a una imagen en HTML para introducir por separado las caracteristicas.
 	$array_nombres_caracteristicas = leerConfigYSacarNombres();
-	($array_nombres_caracteristicas);
 	$array_caracteristicas_completas_img = array();
-	$text = "<img class='img'>";
-	$array_caracteristicas_completas_img = array();
+	$text = "<img class='img'";
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$text = "<img class='img' sexo='$array_sexoU[$i]' pelo='$array_peloU[$i]' gafas='$array_gafasU[$i]' ";
+
 		array_push($array_caracteristicas_completas_img,$text);
 	}
+
 	return $array_caracteristicas_completas_img;
 }
 //En esta funcion acabamos de contruir la imagen añadiendo el nombre y su ruta.
@@ -145,21 +166,36 @@ function completarImagen ($array_nombres_imagenes_ordenados,$array_caracteristic
 
 $array_caracteristicas_completas_img= leerFicheroYExtraerCaracteristicas();
 $array_nombres_imagenes_ordenados= leerFicheroYExtraerNombre();
-$arrayImagenHecha = completarImagen($array_nombres_imagenes_ordenados,$array_caracteristicas_completas_img);
-shuffle($arrayImagenHecha);
+$arrayImagenHecha = null;
 
-echo "<h4 align='center'>Carta del Servidor</h4>";
+if (isset($_SESSION["arrayImagen"])) {
+	$arrayImagenHecha=$_SESSION["arrayImagen"];
+} else {
+	$arrayImagenHecha = completarImagen($array_nombres_imagenes_ordenados,$array_caracteristicas_completas_img);
+	shuffle($arrayImagenHecha);
+	$_SESSION["arrayImagen"]=$arrayImagenHecha;
+}
 
-echo "<table style='border:1px solid black' align='center' ";
+echo "<div id='contenedorServidor'>";
 
-echo "<tr><td id='tdGrande' style='border:1px solid black'>
-<div class='container'>
- <div id='servCard' class='card'>
-    <div class='front' >
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+$k = random_int(0, 11);
+
+echo "<table style='border:2px solid black' align='center'";
+echo "<tr><td style='border:1px solid black'>
+<div class='container_servidor'>
+ <div id = 'servCard' class='card' >
+    <div class='front'>
           <img class='img' src='assets/reverso/cardBack.jpg'/>
     </div>
     <div class='back'>
-   		 $arrayImagenHecha[0]
+   		 $arrayImagenHecha[$k]
     </div>
   </div>
 </div>
@@ -167,26 +203,18 @@ echo "<tr><td id='tdGrande' style='border:1px solid black'>
 
 
 echo "</table>";
+echo "</div>";
 
-
-
-echo "<br>";
-echo "<br>";
-echo "<br>";
+echo "<div id='contenedorCliente'>";
 echo "<br>";
 echo "<br>";
 
 
-
-shuffle($arrayImagenHecha);
-echo "<div align='center' >";
-echo "<h4 align='center'>Cartas del Cliente</h4>";
 echo"<table style='border:4px solid black' align='center' id='fondoTablero'>";
 $contador = 0;
 for ($i=1; $i <=4; $i++) { 
 	echo "<tr>\n";
 	for ($j=1; $j <=3; $j++) { 
-		
 		echo "<td style='border:1px solid black'>
 			<div class='container'>
 			  <div class='card' >
@@ -209,12 +237,15 @@ echo "</div>";
 
 
 
-echo"<br>";
-echo"<br>";
+// sexo: hombre mujer , Es hombre? ; Es mujer
+// pelo: rubio moreno pelirrojo , Es rubio? ; Es moreno? ; Es pelirrojo?
+// gafas: si no , Tiene gafas? ; No tiene gafas?
+
 function leerConfigYSacarNombres(){
 	$array_de_lineas = file("config/config.txt");
 	$longitude_de_array = count($array_de_lineas);
 	$array_nombres_caracteristicas = array();
+
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$x = preg_split("/:/", $array_de_lineas[$i]);
 		$var_guardar_nombre = $x[0];
@@ -226,6 +257,7 @@ function leerConfigYSacarElResto(){
 	$array_de_lineas = file("config/config.txt");
 	$longitude_de_array = count($array_de_lineas);
 	$array_resto = array();
+
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$x = preg_split("/:/", $array_de_lineas[$i]);
 		$var_guardar = $x[1];
@@ -256,6 +288,7 @@ function separarArrayRestoYSacarPreguntas($array_resto){
 function separarOpciones($array_opciones){
 	$longitude_de_array = count($array_opciones);
 	$array_opcionesSeparadas = array();
+
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$x = preg_split("/&/", $array_opciones[$i]);
 		$var_guardar0 = $x[0];
@@ -269,9 +302,11 @@ function separarOpciones($array_opciones){
 	}
 	return $array_opcionesSeparadas;
 }
+
 function separarPreguntas($array_preguntas){
 	$longitude_de_array = count($array_preguntas);
 	$array_preguntasSeparadas = array();
+
 	for ($i=0; $i <$longitude_de_array ; $i++) { 
 		$x = preg_split("/&/", $array_preguntas[$i]);
 		$var_guardar0 = $x[0];
@@ -285,6 +320,7 @@ function separarPreguntas($array_preguntas){
 	}
 	return $array_preguntasSeparadas;
 }
+
 $array_nombres_caracteristicas = leerConfigYSacarNombres();
 $array_resto = leerConfigYSacarElResto();
 $array_opciones = separarArrayRestoYSacarOpciones($array_resto);
@@ -293,61 +329,37 @@ $array_opcionesSeparadas = separarOpciones($array_opciones);
 $array_preguntasSeparadas = separarOpciones($array_preguntas);
 $longitude_de_array = count($array_nombres_caracteristicas);
 $longitude_de_arrayOpciones = count($array_opcionesSeparadas);
-echo"<br>";
-echo"<label>Preguntas: </label>";
-echo"<select id='preguntasVarias'>";
-echo"<option></option>";
-for ($x=0; $x < $longitude_de_arrayOpciones; $x++) { 
-	echo"<option value='$array_opcionesSeparadas[$x]'>$array_preguntasSeparadas[$x]</option>";		
-	
-}
-echo "</select>";
-
-// echo"<label id='g'> Accesorio:  </label>";
-// echo"<select id='gafas'>";
-// echo"<option></option>";
-// echo"<option value='no'>No lleva gafas?</option>";
-// echo"<option value='si'>Lleva gafas?</option>";
-// echo "</select>";
 
 
-// echo"<br>";
-
-// echo"<label id='s'> Sexo:  </label>";
-// echo"<select  id='sexo'>";
-// echo"<option></option>";
-// echo"<option value='hombre'>Es hombre?</option>";
-// echo"<option value='mujer'>Es mujer?</option>";
-// echo "</select>";
-
-// echo"<br>";
-
-// echo"<label id='p'> Pelo: </label>";
-// echo"<select id='pelo'>";
-// echo"<option></option>";
-// echo"<option value='moreno'> Es moreno?</option>";
-// echo"<option value='rubio'>Es rubio?</option>";
-// echo"<option value='pelirrojo'>Es pelirrojo?</option>";
-// echo "</select>";
-
-
-echo "<br>";
-echo "<br>";
-
-echo "<input onclick='combo()' id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
-echo"<br>";
-echo "<br>";
+echo "<div id='preguntas'>";
+	echo"<br>";
+	echo"<label>Preguntas: </label>";
+	echo"<select Onchange='activarBoton()' id='preguntasVarias'>";
+	echo"<option></option>";
+	for ($x=0; $x < $longitude_de_arrayOpciones; $x++) { 
+		echo"<option value='$array_opcionesSeparadas[$x]'>$array_preguntasSeparadas[$x]</option>";		
+		
+	}
+	echo "</select>";
 
 
 
-echo "<textarea rows='4' cols='50' id='area'>";
+	echo"<br>";
+	echo"<br>";
 
-echo "</textarea>";
+	echo "<input onclick='combo()' id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
+	echo"<br>";
+	echo "<br>";
 
-echo "<br>";
 
-echo "<input type='button' value='Focs Artificials'onclick='fuegosArt()'>";
-echo "</input>";
+
+	echo "<textarea readonly='readonly' rows='4' cols='50' id='area'>";
+
+	echo "</textarea>";
+
+	echo "<br>";
+
+echo "</div>";
 
 
 
@@ -358,6 +370,8 @@ echo "<div id='modal-error' class='clasmodal'>";
 		echo "<p align='center'>Error: no puedes hacer mas de una pregunta</p>";
 		echo "<button onclick='cerrarModal()'>Cerrar";
 		echo "</button>";
+echo "</div>";
+
 echo "</div>";
 
 ?>

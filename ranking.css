@@ -1,0 +1,12 @@
+body {
+	background-image: url(assets/wallpaper1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: black;
+}
+
+table {
+	background-color: cyan;
+}

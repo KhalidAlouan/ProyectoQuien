@@ -1,4 +1,4 @@
-//GLOBAL VAR
+//GLOBAL VAR INMUTABLE
 var CARTA_SERVIDOR = document.getElementById("servCard");
 //GLOBAL VAR
 var easyMode = false;
@@ -6,9 +6,10 @@ var veryEasyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
-var cartasConFlipped = 0;
+var interval;
 
 //GLOBAL END
+
 // Get the modal
 function modalOn(){
 	var contadorIntentos = document.getElementById("texto");
@@ -30,6 +31,8 @@ function spanDisplayNone(){
 	}
 
 }
+
+
 //Funcion que se ejecuta nada mas cagar la pagina que añade todos los eventos necesarios.
 window.onload = function addEvent(){
 	hiddenPreguntaUsuarioAñadirRanking();
@@ -38,6 +41,8 @@ window.onload = function addEvent(){
 	var preguntar = document.getElementById("ferLaPregunta");
 	var easydos = document.getElementById('easydos');
 	var veryeasy = document.getElementById('veryeasy');
+
+	preguntar.disabled = true;
 
 	span.addEventListener("click",spanDisplayNone);
 	preguntar.addEventListener("click", comboAll);
@@ -48,9 +53,11 @@ window.onload = function addEvent(){
 
 		cartas[i].addEventListener("click",flip);
 		cartas[i].addEventListener("click",audio);
-
 	}
 }
+
+
+
 function hiddenFireworks() {
 	var divFire = document.getElementsByClassName("pyro");
 		divFire.style.visibility = 'hidden';
@@ -99,14 +106,23 @@ function endGame(){
 		modalOn();
 		mostrarPreguntaUsuarioAñadirRanking();
 		texto.innerHTML = "Has ganado."
+		sonidoVictoria();
 
 	}else{
 		modalOn();
 		texto.innerHTML = "Has perdido."
-
+		sonidoFracaso();
+		setTimeout(destroy,3000);
+		
 	}
 	
 }
+
+function destroy() {
+	location.href="destroy.php";
+}
+
+
 
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
@@ -132,11 +148,13 @@ function comboAll(){
 	comboBoxSexo();
 	comboBoxPelo();
 }
-
 function comboBoxGafas(){
 	var gafasSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorGafas =CARTA_SERVIDOR.children[1].children[0].getAttribute("gafas").toString();
 	if (gafasSeleccionado == "si") {
+		if(veryEasyMode == true){
+			eliminarOpcion(gafasSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "si") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -154,6 +172,9 @@ function comboBoxGafas(){
 	if (gafasSeleccionado == "no") {
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: No lleva gafas?\n '
 		if (atributoCartaSevidorGafas == "no") {
+			if(veryEasyMode == true){
+				eliminarOpcion(gafasSeleccionado);
+}
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
 			if (easyMode == true) {
 				easyModeComparacionGafasB();
@@ -172,6 +193,9 @@ function comboBoxSexo(){
 	var sexoSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorSexo =CARTA_SERVIDOR.children[1].children[0].getAttribute("sexo").toString();
 	if (sexoSeleccionado == "hombre") {
+		if(veryEasyMode == true){
+			eliminarOpcion(sexoSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es hombre?\n '
 		if (atributoCartaSevidorSexo == "hombre") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -186,6 +210,9 @@ function comboBoxSexo(){
 		}
 	}
 	if (sexoSeleccionado == "mujer") {
+		if(veryEasyMode == true){
+			eliminarOpcion(sexoSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es mujer?\n '
 		if (atributoCartaSevidorSexo == "mujer") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -207,6 +234,9 @@ function comboBoxPelo(){
 	var peloSeleccionado = document.getElementById("preguntasVarias").value.toString();
 	var atributoCartaSevidorPelo =CARTA_SERVIDOR.children[1].children[0].getAttribute("pelo").toString();
 	if (peloSeleccionado == "moreno") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es moreno?\n '
 		if (atributoCartaSevidorPelo == "moreno") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -221,6 +251,9 @@ function comboBoxPelo(){
 		}
 	}
 	if (peloSeleccionado == "rubio") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es rubio?\n '
 		if (atributoCartaSevidorPelo == "rubio") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -236,6 +269,9 @@ function comboBoxPelo(){
 
 	}	
 	if (peloSeleccionado == "pelirrojo") {
+		if(veryEasyMode == true){
+			eliminarOpcion(peloSeleccionado);
+}
 		var textAreaAnadirTextoCliente = document.getElementById("area").value += 'Pregunta escogida: Es pelirrojo?\n '
 		if (atributoCartaSevidorPelo == "pelirrojo") {
 			var textAreaAnadirTextoServidor = document.getElementById("area").value += '> Servidor: Afirmativo\n';
@@ -254,7 +290,6 @@ function comboBoxPelo(){
 
 }
 
-
 //Crea un objeto de tipo audio y que se ejecuta
 function audio() {
 	var audio = new Audio('latigo.mp3');
@@ -267,75 +302,28 @@ function audio() {
 function combo(){
 	var parrafo=document.getElementById("parrafo");
 	var modal=document.getElementById("modal-error");
-	var combos = document.getElementById("gafas").value;
-    var sexo = document.getElementById("sexo").value;
-    var pelo = document.getElementById("pelo").value;
 
-	var gafas = document.getElementById("gafas").value;
-	var sexo = document.getElementById("sexo").value;
-	var pelo = document.getElementById("pelo").value;
+	if (easyMode != true) {
+		tiempo();
+	} 
 
-	array_select = [gafas,sexo,pelo];
-
-
-	var_contar_nulls = 0;
-
-	for (var i = 0; i < array_select.length; i++) {
-		if (array_select[i] == "") {
-			var_contar_nulls++;
-
-		}
-	}
-
-	if (var_contar_nulls <= 1) {
-    	modal.style.visibility="visible";
-        modal.style.display="block";
-        document.getElementById("gafas").selectedIndex=0;
-        document.getElementById("sexo").selectedIndex=0;
-        document.getElementById("pelo").selectedIndex=0;
-        contador_intentos--;
-
-    }
-	
-	
-    
-    contador_intentos++
-
-    // if (var_contar_nulls==1) {
-    // 	contador_intentos--;
-    // 	if (easyMode==true) {
-    // 		contador_intentos--;
-    // 	}
-    // }
-    if (contador_intentos>=1-1) {
+	if (contador_intentos>=1-1) {
     	desactivarModo();
     }
 
+    contador_intentos ++;
 
     if (easyMode == true) {
 		contador_intentos++;
 	}
-
     
-	
-
-	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
-	
-	tiempo();
-	parrafoTiempo.style.visibility="hidden";
-
+ 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
 }
-//Función que desactiva el combo-box de Modos
 
 function desactivarModo(){
-   
-    //selectModos.disabled=true;
-    var label=document.getElementById("easy");
-	var selectModos=document.getElementById("selectModos");
-	label.style.visibility="hidden"
-    selectModos.style.visibility="hidden";
-
+	var easy2=document.getElementById("easydos");
+    easy2.disabled=true;
 }
 
 //Button que cierra el modal
@@ -347,6 +335,21 @@ function cerrarModal(){
 	modal.style.display="none";
 		
 }
+
+//Función que ejecuta el sonido de victoria
+function sonidoVictoria() {
+	var audio = new Audio("victoria.mp3");
+
+	audio.play();
+}
+
+//Función que ejecuta el sonido de derrota
+function sonidoFracaso() {
+	var audio = new Audio("fracaso.mp3");
+
+	audio.play();
+}
+
 
 //Función que cierra el modal al clicar fuera de el modal
 window.onclick=function(event){
@@ -364,14 +367,12 @@ function fuegosArt(){
 	location.href ="FireWorks.html"
 }
 
-//Funcion que hace desaparecer el combo-box junto con el label al seleccionar un modo
-function hola() {
-// return false;
-	
-	var selectModos=document.getElementById("selectModos");
-	
-    selectModos.disabled=true;
 
+function hiddenEasyButton() {
+	var label=document.getElementById("easy");
+	var selectModos=document.getElementById("selectModos");
+	label.style.visibility="hidden";
+	selectModos.style.visibility="hidden";
 }
 
 //MODE EASY
@@ -391,6 +392,22 @@ function removeOnclickFlip(){
 		cartas[i].removeEventListener("click", flip);
 	}
 }
+
+function activateOnclickFlip(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].addEventListener("click", flip);
+	}
+}
+
+function activateOnclicAudio(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].addEventListener("click", audio);
+	}
+}
+
+
 function easyModeComparacionGafasA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -413,6 +430,7 @@ function easyModeComparacionGafasB(){
 	}
 	endGameEasy();
 }
+
 function easyModeComparacionSexoA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -424,6 +442,7 @@ function easyModeComparacionSexoA(){
 	}
 	endGameEasy();
 }
+
 function easyModeComparacionSexoB(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -507,6 +526,8 @@ function easyModeComparacionPeloCNegativo(){
 
 function endGameEasy(){
 	var cartas = document.getElementsByClassName("card");
+		cartasConFlipped = 0;
+
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
 		if (cartas[i].classList.contains("flipped")) {
 			cartasConFlipped++;
@@ -516,43 +537,55 @@ function endGameEasy(){
 	if (cartasConFlipped == 11) {
 		endGame();
 	}
-	cartasConFlipped = 0;
 }
+function eliminarOpcion(opcion){
+	var opciones = document.getElementById("preguntasVarias");
+	for (var i = opciones.length - 1; i >= 0; i--) {
+		if (opciones.options[i].value == opcion) {
+			opciones.remove(i);
+		}
+	}
 
+}
 //END MODE EASY
 
-function timer(){
-	var n = 5;
-	var l = document.getElementById("tiempo");
-	var boton = document.getElementById("ferLaPregunta"); 
-	var interval=setInterval(function(){
-  	l.innerHTML = n;
-  	n--;
-	  	if (n <= -1) {
-	  		clearInterval(interval);
-		  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
-		  	
-		  }
-	},1000);
+function activarBoton(){
+	var lista = document.getElementById("preguntasVarias");
+	var boton = document.getElementById("ferLaPregunta");
+	if(lista.selectedIndex !=0 )
+	  boton.disabled = false;
+	else{
+	  boton.disabled = true;
+	}
 }
+
+
 //20 segons para girar las cartas
 
 function tiempo(){
-	var n = 5;
-	var l = document.getElementById("tiempo");
+	
+	var cartas = document.getElementsByClassName("card");
+	var segundos = 20;
+	var tiempo = document.getElementById("tiempo");
 	var boton = document.getElementById("ferLaPregunta"); 
-	var interval=setInterval(function(){
-  	l.innerHTML = n;
-  	n--;
-	  	if (n <= -1) {
+
+	activateOnclickFlip();
+	activateOnclicAudio();
+	
+	clearInterval(interval);
+	clearTimeout(interval);
+
+	interval=setInterval(function(){
+  	tiempo.innerHTML = segundos;
+  	segundos--;
+	  	if (segundos <= -1) {
 	  		clearInterval(interval);
-	  		parrafoTiempo.style.visibility="visible";
-		  	parrafoTiempo.innerHTML = "Se acabo el tiempo";
-		  	
+		  	removeOnclickFlip();
+
+			for (var i = 0 ; cartas.length -1 >= i; i++) {
+				cartas[i].removeEventListener("click",audio);
+			}
 		  }
 	},1000);
 
 }
-
-
-	
