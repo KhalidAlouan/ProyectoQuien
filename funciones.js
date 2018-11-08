@@ -6,7 +6,7 @@ var veryEasyMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
-var cartasConFlipped = 0;
+
 //GLOBAL END
 
 // Get the modal
@@ -111,10 +111,17 @@ function endGame(){
 		modalOn();
 		texto.innerHTML = "Has perdido."
 		sonidoFracaso();
-		location.href="destroy.php";
+		setTimeout(destroy,3000);
+		
 	}
 	
 }
+
+function destroy() {
+	location.href="destroy.php";
+}
+
+
 
 //Se encarga de añadir la class que permite el efecto de girar.
 function flip(element) {
@@ -274,6 +281,8 @@ function combo(){
 	var parrafo=document.getElementById("parrafo");
 	var modal=document.getElementById("modal-error");
 
+	tiempo();
+
 	if (contador_intentos>=1-1) {
     	desactivarModo();
     }
@@ -284,14 +293,7 @@ function combo(){
 		contador_intentos++;
 	}
     
-    /*if (var_contar_nulls == 3) {
-    	contador_intentos--
-    	if (easyMode == true) {
-		contador_intentos--;
-		}
-    }*/
-  
-	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
+ 	document.getElementById("contador").innerHTML = "Has hecho : "+contador_intentos+" "+"preguntas";
 
 }
 
@@ -366,6 +368,22 @@ function removeOnclickFlip(){
 		cartas[i].removeEventListener("click", flip);
 	}
 }
+
+function activateOnclickFlip(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].addEventListener("click", flip);
+	}
+}
+
+function activateOnclicAudio(){
+	var cartas = document.getElementsByClassName("card");
+	for (var i = 0 ; cartas.length -1 >= i; i++) {
+		cartas[i].addEventListener("click", audio);
+	}
+}
+
+
 function easyModeComparacionGafasA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -388,6 +406,7 @@ function easyModeComparacionGafasB(){
 	}
 	endGameEasy();
 }
+
 function easyModeComparacionSexoA(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -399,6 +418,7 @@ function easyModeComparacionSexoA(){
 	}
 	endGameEasy();
 }
+
 function easyModeComparacionSexoB(){
 	var cartas = document.getElementsByClassName("card");
 	for (var i = 0 ; cartas.length -1 >= i; i++) {
@@ -504,4 +524,33 @@ function activarBoton(){
 	else{
 	  boton.disabled = true;
 	}
+}
+
+
+//20 segons para girar las cartas
+
+function tiempo(){
+	
+	var cartas = document.getElementsByClassName("card");
+	var segundos = 5;
+	var tiempo = document.getElementById("tiempo");
+	var boton = document.getElementById("ferLaPregunta"); 
+
+	activateOnclickFlip();
+	activateOnclicAudio();
+	
+	clearInterval(interval);
+	var interval=setInterval(function(){
+  	tiempo.innerHTML = segundos;
+  	segundos--;
+	  	if (segundos <= -1) {
+	  		clearInterval(interval);
+		  	removeOnclickFlip();
+
+			for (var i = 0 ; cartas.length -1 >= i; i++) {
+				cartas[i].removeEventListener("click",audio);
+			}
+		  }
+	},1000);
+
 }
