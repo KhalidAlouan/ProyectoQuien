@@ -156,7 +156,7 @@ echo "<tr><td id='tdGrande' style='border:1px solid black'>
 <div class='container'>
  <div id='servCard' class='card'>
     <div class='front' >
-          <img class='img' src='assets/reverso/cardBack.jpg'/>
+          <img class='imgServidor' src='assets/reverso/cardBack.jpg'/>
     </div>
     <div class='back'>
    		 $arrayImagenHecha[0]
