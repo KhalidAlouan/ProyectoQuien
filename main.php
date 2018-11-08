@@ -30,11 +30,16 @@ echo "
 
 echo "<div id='header'>";
 	//Modo easy
-	echo "<label id='easy'>Modo:</label>"; echo "<br>";
+	echo "<label id='easy'>Modo:</label>";
+	echo "<br>";
 	echo "<select id='selectModos'>";
 	echo "<option id='easydos' value='easy'>Easy</option>";
 	echo "<option id='veryeasy' value='veryEasy'>Very Easy</option>";
 	echo "</select>";
+
+	//Timer
+	echo "<p align='center' id='tiempo'> </p>";
+
 	//Mostrar el contador de preguntas
 	echo "<p id='contador' align='right'> Has hecho: 0 preguntas </p>";
 echo "</div>";
@@ -203,7 +208,7 @@ echo "<br>";
 echo "<br>";
 
 
-echo"<table style='border:2px solid black' align='center'>";
+echo"<table style='border:4px solid black' align='center' id='fondoTablero'>";
 $contador = 0;
 for ($i=1; $i <=4; $i++) { 
 	echo "<tr>\n";
@@ -339,34 +344,6 @@ echo "<div id='preguntas'>";
 
 	echo"<br>";
 	echo"<br>";
-
-// echo"<label id='g'> Accesorio:  </label>";
-// echo"<select id='gafas'>";
-// echo"<option></option>";
-// echo"<option value='no'>No lleva gafas?</option>";
-// echo"<option value='si'>Lleva gafas?</option>";
-// echo "</select>";
-
-
-// echo"<br>";
-
-// echo"<label id='s'> Sexo:  </label>";
-// echo"<select  id='sexo'>";
-// echo"<option></option>";
-// echo"<option value='hombre'>Es hombre?</option>";
-// echo"<option value='mujer'>Es mujer?</option>";
-// echo "</select>";
-
-// echo"<br>";
-
-// echo"<label id='p'> Pelo: </label>";
-// echo"<select id='pelo'>";
-// echo"<option></option>";
-// echo"<option value='moreno'> Es moreno?</option>";
-// echo"<option value='rubio'>Es rubio?</option>";
-// echo"<option value='pelirrojo'>Es pelirrojo?</option>";
-// echo "</select>";
-
 
 	echo "<input onclick='combo()' id = 'ferLaPregunta'type='button' value='Fes la Pregunta'>";
 	echo"<br>";
