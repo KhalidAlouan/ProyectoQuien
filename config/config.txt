@@ -1,4 +1,3 @@
 sexo:hombre&mujer,Es hombre?&Es mujer?
 pelo:rubio&moreno&pelirrojo,Es rubio?&Es moreno?&Es pelirrojo?
 gafas:si&no,Tiene gafas?&No tiene gafas?
-jamon:si&no,Tiene jamon?&no tiene jamon?

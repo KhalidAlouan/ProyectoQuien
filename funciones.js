@@ -3,6 +3,7 @@ var CARTA_SERVIDOR = document.getElementById("servCard");
 //GLOBAL VAR
 var easyMode = false;
 var veryEasyMode = false;
+var hardMode = false;
 var cartas = 11;
 var contador_intentos = 0;
 var cartaFinal;
@@ -55,7 +56,6 @@ window.onload = function addEvent(){
 		cartas[i].addEventListener("click",audio);
 	}
 }
-
 
 
 function hiddenFireworks() {
